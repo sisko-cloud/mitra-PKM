@@ -14,6 +14,7 @@ use App\Http\Controllers\Owner\OwnerStatusController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicHomeController;
 use App\Http\Controllers\PublicMitraWebsiteController;
+use App\Http\Controllers\PublicStorageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,9 @@ Route::get('/', [PublicHomeController::class, 'index'])->name('home');
 
 // 2. Website Promosi Publik Mitra (Read-Only tanpa login)
 Route::get('/mitra/{slug}', [PublicMitraWebsiteController::class, 'show'])->name('mitra.show');
+
+// Storage route fallback for serverless deployments
+Route::get('/storage/{path}', [PublicStorageController::class, 'show'])->where('path', '.*')->name('public.storage');
 
 // Redirect cerdas /dashboard ke peran masing-masing
 Route::get('/dashboard', function () {

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
+use App\Services\FileUploadService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class OwnerStatusController extends Controller
@@ -60,18 +60,24 @@ class OwnerStatusController extends Controller
 
         // Ganti logo jika diunggah baru
         if ($request->hasFile('logo')) {
-            if ($mitra && $mitra->logo && Storage::disk('public')->exists($mitra->logo)) {
-                Storage::disk('public')->delete($mitra->logo);
+            if ($mitra && $mitra->logo) {
+                FileUploadService::delete($mitra->logo);
             }
-            $updateData['logo'] = $request->file('logo')->store('logos', 'public');
+            $newLogo = FileUploadService::upload($request->file('logo'), 'logos');
+            if ($newLogo) {
+                $updateData['logo'] = $newLogo;
+            }
         }
 
         // Ganti dokumen jika diunggah baru
         if ($request->hasFile('dokumen_pendukung')) {
-            if ($mitra && $mitra->dokumen_pendukung && Storage::disk('public')->exists($mitra->dokumen_pendukung)) {
-                Storage::disk('public')->delete($mitra->dokumen_pendukung);
+            if ($mitra && $mitra->dokumen_pendukung) {
+                FileUploadService::delete($mitra->dokumen_pendukung);
             }
-            $updateData['dokumen_pendukung'] = $request->file('dokumen_pendukung')->store('dokumen', 'public');
+            $newDokumen = FileUploadService::upload($request->file('dokumen_pendukung'), 'dokumen');
+            if ($newDokumen) {
+                $updateData['dokumen_pendukung'] = $newDokumen;
+            }
         }
 
         if ($mitra) {

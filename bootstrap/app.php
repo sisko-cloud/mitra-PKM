@@ -15,6 +15,12 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+// Support dynamic writable storage path (crucial for Vercel / serverless runtimes)
+$customStorage = env('APP_STORAGE', $_ENV['APP_STORAGE'] ?? $_SERVER['APP_STORAGE'] ?? null);
+if ($customStorage) {
+    $app->useStoragePath($customStorage);
+}
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

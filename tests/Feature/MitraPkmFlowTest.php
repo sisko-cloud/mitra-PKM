@@ -6,6 +6,8 @@ use App\Models\Mitra;
 use App\Models\User;
 use App\Services\MitraWebsiteGeneratorService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class MitraPkmFlowTest extends TestCase
@@ -15,6 +17,13 @@ class MitraPkmFlowTest extends TestCase
      */
     public function test_owner_registers_pending_and_cannot_access_editor(): void
     {
+        // Pastikan tidak ada data uji sebelumnya
+        $oldUser = User::where('email', 'bambang@kerajinanbambu.com')->first();
+        if ($oldUser) {
+            $oldUser->mitra?->delete();
+            $oldUser->delete();
+        }
+
         $response = $this->post(route('register'), [
             'name' => 'Bambang Sutrisno',
             'email' => 'bambang@kerajinanbambu.com',
@@ -41,6 +50,50 @@ class MitraPkmFlowTest extends TestCase
         $this->actingAs($user);
         $editorResponse = $this->get(route('owner.dashboard'));
         $editorResponse->assertRedirect(route('owner.status'));
+
+        // Bersihkan data uji bambang
+        $mitra->delete();
+        $user->delete();
+    }
+
+    /**
+     * Uji Pendaftaran dengan Unggah Berkas (Logo & Dokumen).
+     */
+    public function test_owner_registers_with_files_successfully(): void
+    {
+        Storage::fake('public');
+
+        $logo = UploadedFile::fake()->image('test_logo.png', 200, 200);
+        $dokumen = UploadedFile::fake()->create('test_dokumen.pdf', 500, 'application/pdf');
+
+        $response = $this->post(route('register'), [
+            'name' => 'Siti Nurhaliza',
+            'email' => 'siti.upload@kerajinan.id',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+            'nama_usaha' => 'Tenun Sutra Alam',
+            'jenis' => 'umkm',
+            'alamat' => 'Jl. Pengrajin No. 45, Wajo',
+            'kontak' => '085233344455',
+            'logo' => $logo,
+            'dokumen_pendukung' => $dokumen,
+        ]);
+
+        $response->assertRedirect(route('owner.status'));
+
+        $user = User::where('email', 'siti.upload@kerajinan.id')->first();
+        $this->assertNotNull($user);
+        $this->assertEquals('pending', $user->status);
+
+        $mitra = $user->mitra;
+        $this->assertNotNull($mitra);
+        $this->assertEquals('Tenun Sutra Alam', $mitra->nama_usaha);
+        $this->assertNotNull($mitra->logo);
+        $this->assertNotNull($mitra->dokumen_pendukung);
+
+        // Bersihkan data uji
+        $mitra->delete();
+        $user->delete();
     }
 
     /**
@@ -51,9 +104,32 @@ class MitraPkmFlowTest extends TestCase
         $superadmin = User::where('role', 'superadmin')->first();
         $this->assertNotNull($superadmin);
 
-        $owner = User::where('status', 'pending')->first();
-        $this->assertNotNull($owner);
-        $mitra = $owner->mitra;
+        // Siapkan akun owner pending dengan data usaha
+        $owner = User::updateOrCreate(
+            ['email' => 'pending.test@batikprabu.com'],
+            [
+                'name' => 'Raden Mas Hendro Test',
+                'password' => bcrypt('password123'),
+                'role' => 'owner',
+                'status' => 'pending',
+            ]
+        );
+        $owner->update(['status' => 'pending']);
+
+        $mitra = Mitra::updateOrCreate(
+            ['user_id' => $owner->id],
+            [
+                'nama_usaha' => 'Batik Prabu Keraton Test',
+                'jenis' => 'umkm',
+                'alamat' => 'Solo',
+                'kontak' => '081234567890',
+                'slug' => 'batik-prabu-keraton-test',
+            ]
+        );
+        // Hapus content lama jika ada agar auto-generator berjalan penuh
+        $mitra->websiteContent?->delete();
+        $mitra->contact?->delete();
+        $mitra->products()->delete();
 
         $this->actingAs($superadmin);
         $approveResponse = $this->post(route('admin.verifications.approve', $mitra->id));
@@ -179,5 +255,8 @@ class MitraPkmFlowTest extends TestCase
         // Halaman landing page tidak boleh menampilkan nama mitra yang dinonaktifkan
         $homeVisit = $this->get(route('home'));
         $homeVisit->assertDontSee($mitra->nama_usaha);
+
+        // Kembalikan status mitra untuk kebersihan tes berikutnya
+        $mitra->update(['is_active' => true]);
     }
 }

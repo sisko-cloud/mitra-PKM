@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Services\FileUploadService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class OwnerProductController extends Controller
@@ -44,7 +44,7 @@ class OwnerProductController extends Controller
 
         $fotoPath = null;
         if ($request->hasFile('foto')) {
-            $fotoPath = $request->file('foto')->store('products', 'public');
+            $fotoPath = FileUploadService::upload($request->file('foto'), 'products');
         }
 
         $nextUrutan = $request->filled('urutan')
@@ -92,10 +92,13 @@ class OwnerProductController extends Controller
         $fotoPath = $product->foto;
         if ($request->hasFile('foto')) {
             // Hapus file lama jika ada
-            if ($product->foto && Storage::disk('public')->exists($product->foto)) {
-                Storage::disk('public')->delete($product->foto);
+            if ($product->foto) {
+                FileUploadService::delete($product->foto);
             }
-            $fotoPath = $request->file('foto')->store('products', 'public');
+            $uploaded = FileUploadService::upload($request->file('foto'), 'products');
+            if ($uploaded) {
+                $fotoPath = $uploaded;
+            }
         }
 
         $product->update([

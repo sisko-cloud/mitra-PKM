@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use App\Models\WebsiteContent;
+use App\Services\FileUploadService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class OwnerHeroController extends Controller
@@ -41,11 +41,14 @@ class OwnerHeroController extends Controller
 
         $imagePath = $content->hero_image;
         if ($request->hasFile('hero_image')) {
-            // Hapus file lama jika ada dan tersimpan di storage lokal
-            if ($content->hero_image && Storage::disk('public')->exists($content->hero_image)) {
-                Storage::disk('public')->delete($content->hero_image);
+            // Hapus file lama jika ada
+            if ($content->hero_image) {
+                FileUploadService::delete($content->hero_image);
             }
-            $imagePath = $request->file('hero_image')->store('heroes', 'public');
+            $uploaded = FileUploadService::upload($request->file('hero_image'), 'heroes');
+            if ($uploaded) {
+                $imagePath = $uploaded;
+            }
         }
 
         $content->judul = $request->judul;

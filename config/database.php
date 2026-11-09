@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', str_starts_with(env('DATABASE_URL', ''), 'postgres') ? 'pgsql' : 'mysql'),
 
     /*
     |--------------------------------------------------------------------------

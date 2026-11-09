@@ -29,7 +29,7 @@
     <!-- Fonts & Tailwind -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -60,36 +60,39 @@
 
     <style>
         [x-cloak] { display: none !important; }
+        /* Smooth custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="font-sans antialiased bg-slate-50 text-slate-800 selection:bg-emerald-600 selection:text-white">
+<body class="font-sans antialiased bg-slate-50 text-slate-800 selection:bg-emerald-600 selection:text-white" x-data="{ mobileNav: false }">
 
-    <!-- PREVIEW NOTICE BAR (IF ACCESSED FROM PREVIEW) -->
+    <!-- PREVIEW NOTICE BAR -->
     @if (!empty($isPreview) && $isPreview)
         <div class="bg-amber-500 text-slate-950 px-4 py-2 text-xs font-bold flex items-center justify-between sticky top-0 z-50 shadow-md">
             <span class="flex items-center gap-2">
                 <i class="fa-solid fa-eye animate-bounce"></i>
-                <span>MODE PRATINJAU WEBSITE: Ini adalah pratinjau tampilan sebelum atau sesudah publikasi.</span>
+                <span>MODE PRATINJAU WEBSITE: Tinjau tampilan sebelum atau sesudah publikasi.</span>
             </span>
-            <div class="flex items-center gap-3">
-                <a href="{{ route('owner.dashboard') }}" class="px-3 py-1 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition text-[11px]">
-                    <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Dashboard
-                </a>
-            </div>
+            <a href="{{ route('owner.dashboard') }}" class="px-3 py-1 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition text-[11px]">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Dashboard Editor
+            </a>
         </div>
     @endif
 
-    <!-- STICKY HEADER NAVIGATION WITH SMOOTH SCROLL -->
-    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky {{ !empty($isPreview) && $isPreview ? 'top-8' : 'top-0' }} z-40 shadow-xs transition-all" x-data="{ mobileMenu: false }">
+    <!-- STICKY HEADER NAVIGATION -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky {{ !empty($isPreview) && $isPreview ? 'top-8' : 'top-0' }} z-40 shadow-xs transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 sm:h-20">
 
-                <!-- Logo & Usaha Name -->
-                <a href="#beranda" class="flex items-center gap-3 group">
+                <!-- Logo & Business Name -->
+                <a href="#beranda" class="flex items-center gap-3 group shrink-0">
                     @if ($mitra->logo)
-                        <img src="{{ asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-cover border border-slate-200 shadow-xs">
+                        <img src="{{ asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl object-cover border border-slate-200 shadow-xs">
                     @else
-                        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-black text-lg shadow-sm">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-black text-lg shadow-sm">
                             {{ substr($mitra->nama_usaha, 0, 2) }}
                         </div>
                     @endif
@@ -114,10 +117,10 @@
                     <a href="#kontak" class="hover:text-emerald-600 transition">Kontak & Lokasi</a>
                 </nav>
 
-                <!-- Header Actions -->
+                <!-- Actions Right -->
                 <div class="flex items-center gap-3">
                     @if ($waNumber)
-                        <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode('Halo ' . $mitra->nama_usaha . ', saya melihat website promosi Anda di Mitra PKM dan ingin bertanya mengenai produk.') }}"
+                        <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode('Halo ' . $mitra->nama_usaha . ', saya melihat website promosi Anda dan ingin bertanya mengenai produk.') }}"
                            target="_blank"
                            class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-emerald-600/20">
                             <i class="fa-brands fa-whatsapp text-base"></i>
@@ -129,26 +132,26 @@
                         <i class="fa-solid fa-arrow-left text-[10px]"></i> Portal Mitra PKM
                     </a>
 
-                    <!-- Mobile Menu Hamburger -->
-                    <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100">
-                        <i class="fa-solid fa-bars text-xl" x-show="!mobileMenu"></i>
-                        <i class="fa-solid fa-xmark text-xl" x-show="mobileMenu" x-cloak></i>
+                    <!-- Mobile Hamburger -->
+                    <button @click="mobileNav = !mobileNav" class="md:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition focus:outline-none" aria-label="Menu Navigasi">
+                        <i class="fa-solid fa-bars text-xl" x-show="!mobileNav"></i>
+                        <i class="fa-solid fa-xmark text-xl" x-show="mobileNav" x-cloak></i>
                     </button>
                 </div>
 
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div x-show="mobileMenu" x-cloak class="md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-2 text-sm font-semibold">
-            <a href="#beranda" @click="mobileMenu = false" class="block py-2 text-slate-700 hover:text-emerald-600">Beranda</a>
-            <a href="#tentang" @click="mobileMenu = false" class="block py-2 text-slate-700 hover:text-emerald-600">Tentang Kami</a>
-            <a href="#produk" @click="mobileMenu = false" class="block py-2 text-slate-700 hover:text-emerald-600">Katalog Produk</a>
-            <a href="#kontak" @click="mobileMenu = false" class="block py-2 text-slate-700 hover:text-emerald-600">Kontak & Lokasi</a>
+        <!-- Mobile Drawer -->
+        <div x-show="mobileNav" x-cloak class="md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-2 text-sm font-semibold shadow-lg">
+            <a href="#beranda" @click="mobileNav = false" class="block py-2 text-slate-700 hover:text-emerald-600">Beranda</a>
+            <a href="#tentang" @click="mobileNav = false" class="block py-2 text-slate-700 hover:text-emerald-600">Tentang Kami</a>
+            <a href="#produk" @click="mobileNav = false" class="block py-2 text-slate-700 hover:text-emerald-600">Katalog Produk</a>
+            <a href="#kontak" @click="mobileNav = false" class="block py-2 text-slate-700 hover:text-emerald-600">Kontak & Lokasi</a>
             @if ($waNumber)
                 <div class="pt-2 border-t border-slate-100">
-                    <a href="https://wa.me/{{ $waNumber }}" target="_blank" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-emerald-600 text-white rounded-xl font-bold text-xs">
-                        <i class="fa-brands fa-whatsapp"></i> Hubungi via WhatsApp
+                    <a href="https://wa.me/{{ $waNumber }}" target="_blank" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-emerald-600 text-white rounded-xl font-bold text-xs shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Hubungi via WhatsApp
                     </a>
                 </div>
             @endif
@@ -156,7 +159,7 @@
     </header>
 
     <!-- SECTION 1: BERANDA / HERO BANNER -->
-    <section id="beranda" class="relative bg-slate-900 text-white overflow-hidden">
+    <section id="beranda" class="relative bg-slate-950 text-white overflow-hidden">
         <!-- Background Hero Image with Dark Gradient Overlay -->
         <div class="absolute inset-0 z-0">
             @if ($content?->hero_image)
@@ -170,8 +173,8 @@
         </div>
 
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-36 relative z-10 text-center">
-            <!-- Badge Kemitraan -->
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs sm:text-sm font-semibold mb-6 backdrop-blur-xs">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs sm:text-sm font-semibold mb-6 backdrop-blur-xs shadow-xs">
                 <i class="fa-solid fa-award text-emerald-400"></i>
                 <span>Mitra Resmi Binaan Program Kreativitas Mahasiswa (PKM)</span>
             </div>
@@ -182,14 +185,14 @@
             </h1>
 
             <!-- Tagline -->
-            <p class="text-base sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-10 font-normal">
+            <p class="text-sm sm:text-lg lg:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-10 font-normal">
                 {{ $content?->tagline ?? 'Menyajikan produk dan layanan terbaik dengan integritas mutu dan pemberdayaan potensi lokal.' }}
             </p>
 
             <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md sm:max-w-none mx-auto">
                 @if ($waNumber)
-                    <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode('Halo ' . $mitra->nama_usaha . ', saya tertarik dengan produk Anda di website promosi.') }}"
+                    <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode('Halo ' . $mitra->nama_usaha . ', saya tertarik dengan produk Anda di website promosi resmi.') }}"
                        target="_blank"
                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm sm:text-base rounded-2xl shadow-xl shadow-emerald-600/30 transition transform hover:-translate-y-0.5">
                         <i class="fa-brands fa-whatsapp text-xl"></i>
@@ -206,21 +209,21 @@
         </div>
     </section>
 
-    <!-- SECTION 2: TENTANG KAMI / DESKRIPSI, SEJARAH, VISI & MISI -->
+    <!-- SECTION 2: TENTANG KAMI / PROFIL, SEJARAH, VISI & MISI -->
     <section id="tentang" class="py-20 sm:py-28 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2 block">Profil & Integritas Usaha</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Tentang {{ $mitra->nama_usaha }}</h2>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">Tentang {{ $mitra->nama_usaha }}</h2>
                 <div class="w-16 h-1 bg-emerald-600 mx-auto mt-4 rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
                 <!-- Deskripsi & Sejarah (7 Cols) -->
                 <div class="lg:col-span-7 space-y-8">
                     <!-- Deskripsi Usaha -->
-                    <div class="prose prose-slate max-w-none">
-                        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-circle-info text-emerald-600 text-lg"></i>
                             <span>Profil Usaha</span>
                         </h3>
@@ -245,10 +248,10 @@
 
                 <!-- Visi & Misi Card (5 Cols) -->
                 <div class="lg:col-span-5">
-                    <div class="bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden">
-                        <div class="absolute -right-8 -top-8 w-40 h-40 bg-emerald-500/20 rounded-full blur-2xl"></div>
+                    <div class="bg-gradient-to-br from-emerald-950 via-teal-950 to-slate-950 text-white rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden border border-emerald-900/40">
+                        <div class="absolute -right-8 -top-8 w-40 h-40 bg-emerald-500/15 rounded-full blur-2xl"></div>
 
-                        <h3 class="text-xl font-extrabold mb-6 flex items-center gap-2 text-white border-b border-white/10 pb-4">
+                        <h3 class="text-lg sm:text-xl font-extrabold mb-6 flex items-center gap-2 text-white border-b border-white/10 pb-4">
                             <i class="fa-solid fa-bullseye text-emerald-400"></i>
                             <span>Visi & Misi Kami</span>
                         </h3>
@@ -273,8 +276,8 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14 pb-4 border-b border-slate-200">
                 <div>
                     <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2 block">Etalase & Katalog</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Katalog Produk & Galeri Karya</h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Pilih produk yang Anda sukai dan pesan langsung kepada kami via WhatsApp.</p>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">Katalog Produk & Galeri Karya</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Pilih produk yang Anda sukai dan pesan langsung via WhatsApp.</p>
                 </div>
                 <div class="text-xs font-semibold text-slate-500">
                     Menampilkan <strong>{{ $mitra->products->count() }}</strong> penawaran unggulan
@@ -288,16 +291,16 @@
                     <p class="text-xs text-slate-400 mt-1">Pemilik usaha belum menambahkan item produk ke katalog.</p>
                 </div>
             @else
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     @foreach ($mitra->products as $product)
-                        <div class="bg-white rounded-3xl border border-slate-200 shadow-xs hover:shadow-xl hover:border-emerald-300 transition duration-300 overflow-hidden flex flex-col justify-between group">
+                        <div class="bg-white rounded-3xl border border-slate-200 shadow-xs hover:shadow-xl hover:border-emerald-300 transition-all duration-300 overflow-hidden flex flex-col justify-between group">
                             <div>
-                                <!-- Foto Produk -->
-                                <div class="h-60 bg-slate-100 overflow-hidden relative">
+                                <!-- Foto Produk dengan aspect ratio tetap -->
+                                <div class="h-56 sm:h-60 bg-slate-100 overflow-hidden relative">
                                     @if ($product->foto)
                                         <img src="{{ Str::startsWith($product->foto, 'http') ? $product->foto : asset('storage/' . $product->foto) }}"
                                              alt="{{ $product->nama }}"
-                                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center text-slate-300 bg-slate-100">
                                             <i class="fa-regular fa-image text-5xl"></i>
@@ -305,7 +308,7 @@
                                     @endif
 
                                     <!-- Price Tag Badge -->
-                                    <div class="absolute bottom-3 left-3 bg-slate-950/85 backdrop-blur-xs text-white px-3.5 py-1.5 rounded-xl font-extrabold text-sm shadow-md">
+                                    <div class="absolute bottom-3 left-3 bg-slate-950/85 backdrop-blur-xs text-white px-3.5 py-1.5 rounded-xl font-extrabold text-xs sm:text-sm shadow-md">
                                         @if ($product->harga)
                                             Rp {{ number_format($product->harga, 0, ',', '.') }}
                                         @else
@@ -316,7 +319,7 @@
 
                                 <!-- Body Info -->
                                 <div class="p-6">
-                                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition mb-2">
+                                    <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition mb-2 line-clamp-1">
                                         {{ $product->nama }}
                                     </h3>
                                     <p class="text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-3">
@@ -329,7 +332,7 @@
                             <div class="p-6 pt-0">
                                 @if ($waNumber)
                                     @php
-                                        $msg = 'Halo ' . $mitra->nama_usaha . ', saya tertarik untuk memesan/bertanya mengenai produk: "' . $product->nama . '" yang tertera di website promosi resmi Anda.';
+                                        $msg = 'Halo ' . $mitra->nama_usaha . ', saya tertarik memesan produk: "' . $product->nama . '" yang tertera di website promosi resmi Anda.';
                                     @endphp
                                     <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode($msg) }}"
                                        target="_blank"
@@ -351,11 +354,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2 block">Informasi & Lokasi</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Hubungi & Kunjungi Kami</h2>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">Hubungi & Kunjungi Kami</h2>
                 <div class="w-16 h-1 bg-emerald-600 mx-auto mt-4 rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
 
                 <!-- Detail Kontak & Medsos (5 Cols) -->
                 <div class="lg:col-span-5 space-y-6">
@@ -453,17 +456,17 @@
 
                 <!-- Google Maps Embed (7 Cols) -->
                 <div class="lg:col-span-7">
-                    <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xs h-full min-h-[380px] flex flex-col">
+                    <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xs h-full min-h-[360px] sm:min-h-[420px] flex flex-col">
                         <div class="p-4 bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-600 flex items-center gap-2">
                             <i class="fa-solid fa-map-location-dot text-emerald-600"></i> Peta Lokasi Gerai / Usaha
                         </div>
-                        <div class="flex-grow bg-slate-100 relative">
+                        <div class="flex-grow bg-slate-100 relative min-h-[300px]">
                             @if (!empty($contact?->maps_embed))
                                 <iframe src="{{ $contact->maps_embed }}"
-                                        width="100%" height="100%" style="border:0; min-height: 380px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                        width="100%" height="100%" style="border:0; min-height: 360px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                                 </iframe>
                             @else
-                                <div class="w-full h-full min-h-[380px] flex flex-col items-center justify-center text-slate-400 p-8 text-center">
+                                <div class="w-full h-full min-h-[300px] flex flex-col items-center justify-center text-slate-400 p-8 text-center">
                                     <i class="fa-solid fa-map-pin text-4xl mb-3 text-slate-300"></i>
                                     <span class="font-bold text-slate-600 text-sm">Peta Google Maps Belum Disematkan</span>
                                     <p class="text-xs text-slate-400 max-w-sm mt-1">
@@ -498,15 +501,15 @@
     @endif
 
     <!-- FOOTER RESMI "DIDUKUNG OLEH MITRA PKM" -->
-    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-12">
+    <footer class="bg-slate-950 text-slate-400 border-t border-slate-900 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs">
             <div class="mb-4">
                 <span class="text-white font-extrabold text-base">{{ $mitra->nama_usaha }}</span>
                 <p class="text-slate-500 text-xs mt-0.5">{{ $contact?->alamat ?? $mitra->alamat }}</p>
             </div>
 
-            <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p>&copy; {{ date('Y') }} {{ $mitra->nama_usaha }}. Seluruh hak cipta dilindungi undang-undang.</p>
+            <div class="pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p>&copy; {{ date('Y') }} {{ $mitra->nama_usaha }}. Seluruh hak cipta dilindungi.</p>
                 <div class="flex items-center gap-2">
                     <span>Didukung oleh</span>
                     <a href="{{ route('home') }}" class="font-bold text-white hover:text-emerald-400 transition inline-flex items-center gap-1.5">

@@ -155,9 +155,13 @@
                 </div>
 
                 <!-- Action Form Approve -->
-                <form method="POST" action="{{ route('admin.verifications.approve', $mitra->id) }}" class="mb-3">
+                <form method="POST" action="{{ route('admin.verifications.approve', $mitra->id) }}"
+                    data-confirm="Setujui pendaftaran mitra ini? Template 4-section website promosi akan otomatis dibuat dan notifikasi dikirimkan ke email owner."
+                    data-title="Setujui Pendaftaran Mitra"
+                    data-confirm-text="Ya, Setujui Sekarang"
+                    class="mb-3">
                     @csrf
-                    <button type="submit" onclick="return confirm('Setujui pendaftaran mitra ini? Template 4-section akan otomatis dibuat dan notifikasi dikirim.');"
+                    <button type="submit"
                         class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-orange-600/20">
                         <i class="fa-solid fa-check"></i>
                         <span>Setujui Pendaftaran</span>

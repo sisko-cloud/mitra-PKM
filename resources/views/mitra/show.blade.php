@@ -25,6 +25,7 @@
     <meta property="og:description" content="{{ Str::limit($pageDesc, 200) }}">
     <meta property="og:image" content="{{ $pageImage }}">
     <meta property="og:site_name" content="Mitra PKM">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
     <!-- Fonts & Tailwind -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -106,15 +106,18 @@
 
                                 <!-- Toggle Aktif / Suspended -->
                                 <td class="py-3.5 px-4 text-center">
-                                    <form method="POST" action="{{ route('admin.mitras.toggle-active', $mitra->id) }}">
+                                    <form method="POST" action="{{ route('admin.mitras.toggle-active', $mitra->id) }}"
+                                        data-confirm="{{ $mitra->is_active ? 'Nonaktifkan mitra ini? Halaman website promosi dan kartu etalase akan ditangguhkan.' : 'Aktifkan kembali mitra ini?' }}"
+                                        data-title="{{ $mitra->is_active ? 'Nonaktifkan Mitra' : 'Aktifkan Mitra' }}"
+                                        data-confirm-text="{{ $mitra->is_active ? 'Ya, Nonaktifkan' : 'Ya, Aktifkan' }}">
                                         @csrf
                                         @if ($mitra->is_active)
-                                            <button type="submit" onclick="return confirm('Nonaktifkan mitra ini? Halaman website promosi dan kartu etalase akan ditangguhkan.');"
+                                            <button type="submit"
                                                 class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-orange-500 text-white hover:bg-orange-600 transition shadow-xs">
                                                 <i class="fa-solid fa-circle-check mr-1"></i> Aktif
                                             </button>
                                         @else
-                                            <button type="submit" onclick="return confirm('Aktifkan kembali mitra ini?');"
+                                            <button type="submit"
                                                 class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-600 text-white hover:bg-rose-700 transition shadow-xs">
                                                 <i class="fa-solid fa-ban mr-1"></i> Dinonaktifkan
                                             </button>
@@ -124,7 +127,12 @@
 
                                 <!-- Aksi Hapus -->
                                 <td class="py-3.5 px-4 text-right whitespace-nowrap">
-                                    <form method="POST" action="{{ route('admin.mitras.destroy', $mitra->id) }}" onsubmit="return confirm('PENTING: Apakah Anda yakin ingin MENGHAPUS PERMANEN mitra {{ $mitra->nama_usaha }}? Seluruh data website, produk, dan akun akan dihapus.');" class="inline">
+                                    <form method="POST" action="{{ route('admin.mitras.destroy', $mitra->id) }}"
+                                        data-confirm="PENTING: Apakah Anda yakin ingin MENGHAPUS PERMANEN mitra {{ $mitra->nama_usaha }}? Seluruh data website, produk, dan akun akan dihapus."
+                                        data-title="Hapus Permanen Mitra"
+                                        data-confirm-text="Ya, Hapus Permanen"
+                                        data-destructive="true"
+                                        class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition" title="Hapus Permanen">

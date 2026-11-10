@@ -5,10 +5,8 @@
             <div class="flex items-center">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}" class="flex items-center gap-2 group">
-                        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-500 text-white flex items-center justify-center font-black shadow-sm group-hover:scale-105 transition-transform">
-                            <i class="fa-solid fa-store text-sm sm:text-base"></i>
-                        </div>
+                    <a href="{{ route('home') }}" class="flex items-center gap-2.5 group">
+                        <x-application-logo class="w-9 h-9 sm:w-10 sm:h-10" />
                         <span class="font-bold text-slate-900 dark:text-white text-base sm:text-lg tracking-tight">Mitra <span class="bg-gradient-to-r from-orange-600 to-amber-500 dark:from-orange-400 dark:to-amber-300 bg-clip-text text-transparent">PKM</span></span>
                     </a>
                 </div>

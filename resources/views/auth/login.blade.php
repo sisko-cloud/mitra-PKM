@@ -5,8 +5,8 @@
 @section('content')
 <div class="min-h-[80vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-orange-600 to-amber-500 text-white shadow-lg shadow-orange-600/30 text-2xl font-black mb-4 ring-4 ring-orange-500/20">
-            <i class="fa-solid fa-lock"></i>
+        <div class="flex justify-center">
+            <x-application-logo class="w-16 h-16 mb-4" />
         </div>
         <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Masuk ke Portal Mitra PKM</h2>
         <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">

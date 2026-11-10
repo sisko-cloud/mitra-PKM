@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', 'Mitra PKM - Direktori & Etalase Promosi UMKM dan Koperasi')</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
     <!-- SEO & Open Graph -->
     @yield('meta')
@@ -107,9 +108,7 @@
 
                 <!-- Logo Brand -->
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group shrink-0">
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-orange-500 via-amber-500 to-yellow-500 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-orange-500/25 group-hover:scale-105 transition-transform">
-                        <i class="fa-solid fa-store"></i>
-                    </div>
+                    <x-application-logo class="w-10 h-10 sm:w-11 sm:h-11" />
                     <div>
                         <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight block leading-tight">
                             Mitra <span class="bg-gradient-to-r from-orange-600 to-amber-500 dark:from-orange-400 dark:to-amber-300 bg-clip-text text-transparent">PKM</span>
@@ -248,9 +247,7 @@
                 <!-- Brand Info -->
                 <div class="md:col-span-2">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-orange-500 text-slate-950 flex items-center justify-center font-black text-xl">
-                            <i class="fa-solid fa-store"></i>
-                        </div>
+                        <x-application-logo class="w-10 h-10" />
                         <span class="text-2xl font-extrabold text-white tracking-tight">Mitra <span class="text-orange-400">PKM</span></span>
                     </div>
                     <p class="text-slate-400 text-sm leading-relaxed max-w-md">
@@ -309,5 +306,6 @@
         </div>
     </footer>
 
+    @include('partials.sweetalert')
 </body>
 </html>

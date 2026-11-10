@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+    <defs>
+        <linearGradient id="mp-icon-orange" x1="8" y1="7" x2="40" y2="43" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#FB923C" />
+            <stop offset="50%" stop-color="#F97316" />
+            <stop offset="100%" stop-color="#EA580C" />
+        </linearGradient>
+        <linearGradient id="mp-icon-gold" x1="16" y1="14" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#FDE047" />
+            <stop offset="100%" stop-color="#F59E0B" />
+        </linearGradient>
+    </defs>
+    <!-- Facet highlights -->
+    <path d="M24 7L40 16.2V34.8L24 43L8 34.8V16.2L24 7Z" fill="#FFF7ED" fill-opacity="0.8" />
+    <path d="M24 7L40 16.2L24 25.5L8 16.2L24 7Z" fill="#FED7AA" fill-opacity="0.4" />
+    
+    <!-- Outer Contour -->
+    <path d="M24 7L40 16.2V34.8L24 43L8 34.8V16.2L24 7Z" stroke="url(#mp-icon-orange)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Center Spine -->
+    <path d="M24 25.5V43" stroke="url(#mp-icon-orange)" stroke-width="3.5" stroke-linecap="round" />
+    <!-- Store Roof / Book Seam -->
+    <path d="M8 16.2L24 25.5L40 16.2" stroke="url(#mp-icon-orange)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Rising Innovation Chevron -->
+    <path d="M16 30L24 34.5L32 30" stroke="url(#mp-icon-gold)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" />
+    <!-- Academic Idea Core -->
+    <circle cx="24" cy="16.5" r="2.75" fill="url(#mp-icon-gold)" />
+</svg>

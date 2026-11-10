@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Mitra PKM') }} - @yield('title', 'Dashboard')</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
     <!-- Fonts & Tailwind -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -155,5 +156,6 @@
         </div>
     </footer>
 
+    @include('partials.sweetalert')
 </body>
 </html>

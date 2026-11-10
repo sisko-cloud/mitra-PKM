@@ -84,7 +84,11 @@
                             <a href="{{ route('owner.products.edit', $product->id) }}" class="flex-1 text-center py-2 px-3 rounded-lg bg-slate-50 hover:bg-orange-50 text-slate-700 hover:text-orange-700 text-xs font-semibold border border-slate-200 transition">
                                 <i class="fa-solid fa-pen text-[10px] mr-1"></i> Ubah
                             </a>
-                            <form method="POST" action="{{ route('owner.products.destroy', $product->id) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
+                            <form method="POST" action="{{ route('owner.products.destroy', $product->id) }}"
+                                data-confirm="Apakah Anda yakin ingin menghapus produk '{{ $product->nama }}'? Data yang telah dihapus tidak dapat dipulihkan."
+                                data-title="Hapus Produk"
+                                data-confirm-text="Ya, Hapus"
+                                data-destructive="true">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="py-2 px-3 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-semibold border border-rose-200 transition">

@@ -3,7 +3,7 @@
 @section('title', 'Dashboard Editor - ' . $mitra->nama_usaha)
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+<div class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8">
 
     <!-- Top Partner Hero Banner (Fully Responsive for Mobile, Tablet, Desktop) -->
     <div class="bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 text-white shadow-xl mb-8 relative overflow-hidden">

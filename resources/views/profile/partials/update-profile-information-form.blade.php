@@ -41,7 +41,7 @@
         </div>
     </header>
 
-    <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="space-y-6">
+    <form id="profile-info-form" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @method('patch')
 

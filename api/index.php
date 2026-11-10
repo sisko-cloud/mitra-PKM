@@ -55,16 +55,4 @@ putenv('APP_DEBUG=true');
 $_ENV['APP_DEBUG'] = 'true';
 $_SERVER['APP_DEBUG'] = 'true';
 
-// Copy pre-compiled bootstrap caches to /tmp if available
-$localCacheDir = __DIR__ . '/../bootstrap/cache';
-if (is_dir($localCacheDir)) {
-    foreach (['packages.php', 'services.php'] as $file) {
-        $source = $localCacheDir . '/' . $file;
-        $dest = '/tmp/bootstrap/cache/' . $file;
-        if (file_exists($source) && ! file_exists($dest)) {
-            @copy($source, $dest);
-        }
-    }
-}
-
 require __DIR__ . '/../public/index.php';

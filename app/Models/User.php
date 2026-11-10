@@ -21,6 +21,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'foto_profil',
+        'phone',
         'password',
         'role',
         'status',
@@ -80,5 +82,21 @@ class User extends Authenticatable
     public function mitra(): HasOne
     {
         return $this->hasOne(Mitra::class);
+    }
+
+    /**
+     * Get user profile photo or null.
+     */
+    public function getAvatarUrlAttribute(): ?string
+    {
+        if (! $this->foto_profil) {
+            return null;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($this->foto_profil, ['http://', 'https://', 'data:'])) {
+            return $this->foto_profil;
+        }
+
+        return asset('storage/' . $this->foto_profil);
     }
 }

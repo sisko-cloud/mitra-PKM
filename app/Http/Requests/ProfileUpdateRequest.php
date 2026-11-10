@@ -18,6 +18,9 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'phone' => ['nullable', 'string', 'max:30'],
+            'foto_profil' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],
+            'hapus_foto' => ['nullable', 'boolean'],
         ];
     }
 }

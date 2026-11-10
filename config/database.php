@@ -11,34 +11,9 @@ $dbUser = env('DB_USERNAME', 'forge');
 $dbPass = env('DB_PASSWORD', '');
 $dbSsl = env('DB_SSLMODE', 'require');
 
-if (! empty($databaseUrl)) {
-    $parsedUrl = parse_url($databaseUrl);
-    if (! empty($parsedUrl['host'])) {
-        $rawHost = $parsedUrl['host'];
-        $cleanHost = explode(';', $rawHost)[0];
-        $endpoint = explode('.', str_replace('-pooler', '', $cleanHost))[0];
-        if (str_contains($cleanHost, 'neon.tech') && ! str_contains($rawHost, 'options=')) {
-            $dbHost = "{$cleanHost};options='endpoint={$endpoint}'";
-        } else {
-            $dbHost = $cleanHost;
-        }
-        $dbPort = $parsedUrl['port'] ?? $dbPort;
-        $dbName = isset($parsedUrl['path']) ? ltrim($parsedUrl['path'], '/') : $dbName;
-        $dbUser = $parsedUrl['user'] ?? $dbUser;
-        $dbPass = $parsedUrl['pass'] ?? $dbPass;
-
-        if (isset($parsedUrl['query'])) {
-            parse_str($parsedUrl['query'], $query);
-            $dbSsl = $query['sslmode'] ?? $dbSsl;
-        }
-
-        // Set to null so Laravel uses our normalized host with options rather than unparsed URL
-        $databaseUrl = null;
-    }
-} elseif (is_string($dbHost) && str_contains($dbHost, 'neon.tech') && ! str_contains($dbHost, 'options=')) {
-    $cleanHost = explode(';', $dbHost)[0];
-    $endpoint = explode('.', str_replace('-pooler', '', $cleanHost))[0];
-    $dbHost = "{$cleanHost};options='endpoint={$endpoint}'";
+// Clean any leftover host options if host contains semicolon
+if (is_string($dbHost) && str_contains($dbHost, ';')) {
+    $dbHost = explode(';', $dbHost)[0];
 }
 
 $isPgsqlDefault = (! empty(env('DATABASE_URL')) || str_contains($dbHost, 'neon.tech') || env('DB_CONNECTION') === 'pgsql');

@@ -34,10 +34,17 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Email dari HP sering otomatis berawalan huruf kapital.
+        // Normalisasi dulu agar tidak ditolak oleh aturan lowercase dan
+        // pencarian unique tetap konsisten di PostgreSQL (case-sensitive).
+        $request->merge([
+            'email' => Str::lower(trim((string) $request->input('email'))),
+        ]);
+
         $request->validate([
             // Data Akun
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
 
             // Data Usaha
@@ -50,16 +57,24 @@ class RegisteredUserController extends Controller
         ], [
             'name.required' => 'Nama penanggung jawab wajib diisi.',
             'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format alamat email tidak valid.',
             'email.unique' => 'Email ini sudah terdaftar di sistem.',
             'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Kata sandi minimal 8 karakter.',
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
             'nama_usaha.required' => 'Nama UMKM / Koperasi wajib diisi.',
             'jenis.required' => 'Pilih jenis usaha (UMKM atau Koperasi).',
+            'jenis.in' => 'Jenis usaha tidak valid.',
             'alamat.required' => 'Alamat usaha wajib diisi.',
             'kontak.required' => 'Nomor kontak / WhatsApp wajib diisi.',
+            'logo.image' => 'Logo harus berupa file gambar.',
             'logo.max' => 'Ukuran file logo maksimal 2 MB.',
             'logo.mimes' => 'Format logo harus berupa JPG, PNG, atau WEBP.',
+            'logo.uploaded' => 'Logo gagal diunggah. Coba file dengan ukuran lebih kecil.',
+            'dokumen_pendukung.file' => 'Dokumen pendukung gagal diunggah.',
             'dokumen_pendukung.max' => 'Ukuran dokumen maksimal 2 MB.',
+            'dokumen_pendukung.mimes' => 'Dokumen harus berupa JPG, PNG, WEBP, atau PDF.',
+            'dokumen_pendukung.uploaded' => 'Dokumen gagal diunggah. Coba file dengan ukuran lebih kecil.',
         ]);
 
         DB::beginTransaction();

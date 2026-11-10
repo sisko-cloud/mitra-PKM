@@ -59,6 +59,7 @@
                             <i class="fa-regular fa-envelope"></i>
                         </div>
                         <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                            autocapitalize="none" autocorrect="off" spellcheck="false"
                             class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
                     </div>
                 </div>

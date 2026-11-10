@@ -20,6 +20,19 @@ class LoginRequest extends FormRequest
     }
 
     /**
+     * Normalisasi email agar login tidak gagal hanya karena huruf kapital
+     * (misalnya autokapitalisasi keyboard HP) dan konsisten di PostgreSQL.
+     */
+    protected function prepareForValidation(): void
+    {
+        if ($this->has('email')) {
+            $this->merge([
+                'email' => Str::lower(trim((string) $this->input('email'))),
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>

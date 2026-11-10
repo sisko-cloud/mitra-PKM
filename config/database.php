@@ -16,7 +16,7 @@ if (! empty($databaseUrl)) {
     if (! empty($parsedUrl['host'])) {
         $rawHost = $parsedUrl['host'];
         if (str_contains($rawHost, 'neon.tech') && ! str_contains($rawHost, 'options=')) {
-            $endpoint = explode('.', str_replace('-pooler', '', $rawHost))[0];
+            $endpoint = explode('.', $rawHost)[0];
             $dbHost = "{$rawHost};options='endpoint={$endpoint}'";
         } else {
             $dbHost = $rawHost;
@@ -36,7 +36,7 @@ if (! empty($databaseUrl)) {
     }
 } elseif (is_string($dbHost) && str_contains($dbHost, 'neon.tech') && ! str_contains($dbHost, 'options=')) {
     $cleanHost = explode(';', $dbHost)[0];
-    $endpoint = explode('.', str_replace('-pooler', '', $cleanHost))[0];
+    $endpoint = explode('.', $cleanHost)[0];
     $dbHost = "{$cleanHost};options='endpoint={$endpoint}'";
 }
 

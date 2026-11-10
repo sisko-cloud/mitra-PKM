@@ -17,7 +17,7 @@
             <input type="hidden" name="status" value="{{ $status }}">
             <div class="relative">
                 <input type="text" name="q" value="{{ $search }}" placeholder="Cari nama usaha, pemilik, email..."
-                    class="w-64 sm:w-80 pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-emerald-500 focus:border-emerald-500">
+                    class="w-64 sm:w-80 pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-orange-500 focus:border-orange-500">
                 <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-400"></i>
             </div>
             <button type="submit" class="px-3.5 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-slate-800 transition">
@@ -34,7 +34,7 @@
     <!-- Status Tabs -->
     <div class="flex items-center gap-2 border-b border-slate-200 mb-6 overflow-x-auto text-xs font-semibold pb-1">
         <a href="{{ route('admin.verifications.index', ['status' => 'all', 'q' => $search]) }}"
-           class="px-4 py-2 rounded-t-lg transition border-b-2 {{ $status === 'all' ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50' : 'border-transparent text-slate-600 hover:text-slate-900' }}">
+           class="px-4 py-2 rounded-t-lg transition border-b-2 {{ $status === 'all' ? 'border-orange-600 text-orange-700 bg-orange-50/50' : 'border-transparent text-slate-600 hover:text-slate-900' }}">
             Semua ({{ $counts['all'] }})
         </a>
         <a href="{{ route('admin.verifications.index', ['status' => 'pending', 'q' => $search]) }}"
@@ -43,7 +43,7 @@
             Menunggu Verifikasi ({{ $counts['pending'] }})
         </a>
         <a href="{{ route('admin.verifications.index', ['status' => 'approved', 'q' => $search]) }}"
-           class="px-4 py-2 rounded-t-lg transition border-b-2 {{ $status === 'approved' ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50' : 'border-transparent text-slate-600 hover:text-slate-900' }}">
+           class="px-4 py-2 rounded-t-lg transition border-b-2 {{ $status === 'approved' ? 'border-orange-600 text-orange-700 bg-orange-50/50' : 'border-transparent text-slate-600 hover:text-slate-900' }}">
             Disetujui ({{ $counts['approved'] }})
         </a>
         <a href="{{ route('admin.verifications.index', ['status' => 'rejected', 'q' => $search]) }}"
@@ -101,12 +101,12 @@
                                 <td class="py-3.5 px-4">
                                     <span class="font-semibold text-slate-800 block">{{ $mitra->user?->name }}</span>
                                     <span class="text-slate-500 block">{{ $mitra->user?->email }}</span>
-                                    <span class="text-emerald-700 font-mono text-[11px] block mt-0.5"><i class="fa-brands fa-whatsapp"></i> {{ $mitra->kontak }}</span>
+                                    <span class="text-orange-700 font-mono text-[11px] block mt-0.5"><i class="fa-brands fa-whatsapp"></i> {{ $mitra->kontak }}</span>
                                 </td>
                                 <td class="py-3.5 px-4 whitespace-nowrap">
                                     @php $st = $mitra->user?->status ?? 'pending'; @endphp
                                     @if ($st === 'approved')
-                                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 inline-flex items-center gap-1">
+                                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-orange-100 text-orange-800 inline-flex items-center gap-1">
                                             <i class="fa-solid fa-check"></i> Disetujui
                                         </span>
                                     @elseif ($st === 'rejected')

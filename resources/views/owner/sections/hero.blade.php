@@ -7,17 +7,17 @@
 
     <!-- Breadcrumb & Back -->
     <div class="mb-6 flex items-center justify-between">
-        <a href="{{ route('owner.dashboard') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-emerald-600 transition">
+        <a href="{{ route('owner.dashboard') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition">
             <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
         </a>
-        <a href="{{ route('owner.preview') }}#beranda" target="_blank" class="text-xs font-semibold text-emerald-600 hover:underline">
+        <a href="{{ route('owner.preview') }}#beranda" target="_blank" class="text-xs font-semibold text-orange-600 hover:underline">
             <i class="fa-regular fa-eye mr-1"></i> Pratinjau Section Ini
         </a>
     </div>
 
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
         <div class="flex items-center gap-3 pb-4 border-b border-slate-200 mb-6">
-            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-lg">
+            <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center font-black text-lg">
                 1
             </div>
             <div>
@@ -36,7 +36,7 @@
                 </label>
                 <input id="judul" type="text" name="judul" value="{{ old('judul', $content->judul ?? $mitra->nama_usaha) }}" required
                     placeholder="Contoh: Kopi Senopati Heritage"
-                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
                 <p class="text-[11px] text-slate-500 mt-1">Judul ini juga otomatis digunakan sebagai judul tag SEO browser dan meta pratinjau tautan media sosial.</p>
             </div>
 
@@ -47,7 +47,7 @@
                 </label>
                 <input id="tagline" type="text" name="tagline" value="{{ old('tagline', $content->tagline) }}"
                     placeholder="Contoh: Cita Rasa Kopi Nusantara Autentik dari Petani Lokal ke Cangkir Anda"
-                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
                 <p class="text-[11px] text-slate-500 mt-1">Slogan atau pesan utama yang langsung dibaca oleh calon pembeli di bawah judul.</p>
             </div>
 
@@ -71,7 +71,7 @@
 
                 <div class="p-4 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 hover:bg-slate-100/50 transition">
                     <input id="hero_image" type="file" name="hero_image" accept="image/jpeg,image/png,image/webp"
-                        class="block w-full text-xs text-slate-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 file:cursor-pointer">
+                        class="block w-full text-xs text-slate-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-orange-600 file:text-white hover:file:bg-orange-700 file:cursor-pointer">
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
                 <a href="{{ route('owner.dashboard') }}" class="px-4 py-2.5 border border-slate-300 rounded-xl text-slate-700 text-xs font-semibold hover:bg-slate-50 transition">
                     Batal
                 </a>
-                <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-emerald-600/30">
+                <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-orange-600/30">
                     <i class="fa-solid fa-floppy-disk"></i> Simpan Section Beranda
                 </button>
             </div>

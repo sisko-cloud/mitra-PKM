@@ -21,7 +21,7 @@
                 </label>
                 <input id="hero_badge" type="text" name="hero_badge" value="{{ old('hero_badge', $settings['hero_badge']) }}"
                     placeholder="Contoh: Platform Resmi Etalase UMKM & Koperasi PKM"
-                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500">
+                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500">
             </div>
 
             <!-- Hero Title -->
@@ -31,7 +31,7 @@
                 </label>
                 <input id="hero_title" type="text" name="hero_title" value="{{ old('hero_title', $settings['hero_title']) }}" required
                     placeholder="Mitra PKM"
-                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-base font-extrabold text-slate-900 placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500">
+                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-base font-extrabold text-slate-900 placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500">
                 <p class="text-[11px] text-slate-500 mt-1">Judul berukuran besar yang menyambut pengunjung saat membuka halaman depan.</p>
             </div>
 
@@ -41,7 +41,7 @@
                     Deskripsi Singkat Halaman Awal <span class="text-rose-500">*</span>
                 </label>
                 <textarea id="hero_description" name="hero_description" rows="3" required
-                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:ring-emerald-500 focus:border-emerald-500">{{ old('hero_description', $settings['hero_description']) }}</textarea>
+                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500">{{ old('hero_description', $settings['hero_description']) }}</textarea>
                 <p class="text-[11px] text-slate-500 mt-1">Penjelasan singkat tentang tujuan platform Mitra PKM untuk UMKM & Koperasi binaan.</p>
             </div>
 
@@ -52,18 +52,18 @@
                     <div>
                         <label for="contact_email" class="block text-xs font-semibold text-slate-700 mb-1">Email Layanan Platform</label>
                         <input id="contact_email" type="email" name="contact_email" value="{{ old('contact_email', $settings['contact_email']) }}"
-                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-emerald-500 focus:border-emerald-500">
+                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-orange-500 focus:border-orange-500">
                     </div>
                     <div>
                         <label for="contact_phone" class="block text-xs font-semibold text-slate-700 mb-1">Telepon / WhatsApp Layanan</label>
                         <input id="contact_phone" type="text" name="contact_phone" value="{{ old('contact_phone', $settings['contact_phone']) }}"
-                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-emerald-500 focus:border-emerald-500">
+                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-orange-500 focus:border-orange-500">
                     </div>
                 </div>
             </div>
 
             <div class="pt-4 border-t border-slate-200 flex justify-end">
-                <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-emerald-600/30">
+                <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-orange-600/30">
                     <i class="fa-solid fa-floppy-disk"></i> Simpan Pengaturan Halaman Awal
                 </button>
             </div>

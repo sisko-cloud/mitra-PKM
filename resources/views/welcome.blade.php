@@ -5,15 +5,15 @@
 @section('content')
 
 <!-- HERO SECTION PUBLIK -->
-<section class="relative bg-gradient-to-b from-slate-950 via-emerald-950 to-slate-900 text-white py-16 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-emerald-900/30">
+<section class="relative bg-gradient-to-b from-slate-950 via-orange-950 to-slate-900 text-white py-16 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-orange-900/30">
     <!-- Ambient glow decorative circles -->
-    <div class="absolute -top-32 -left-32 w-[30rem] h-[30rem] bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute top-1/2 -right-32 w-[30rem] h-[30rem] bg-teal-400/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -top-32 -left-32 w-[30rem] h-[30rem] bg-orange-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 -right-32 w-[30rem] h-[30rem] bg-amber-400/15 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="max-w-5xl mx-auto text-center relative z-10">
         <!-- Top Badge -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-semibold mb-6 backdrop-blur-sm shadow-xs">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/15 border border-orange-400/30 text-orange-300 text-xs sm:text-sm font-semibold mb-6 backdrop-blur-sm shadow-xs">
+            <span class="w-2 h-2 rounded-full bg-orange-400 animate-ping"></span>
             <span>{{ $heroBadge }}</span>
         </div>
 
@@ -46,7 +46,7 @@
                         <option value="koperasi" {{ $filterJenis === 'koperasi' ? 'selected' : '' }}>Koperasi</option>
                     </select>
 
-                    <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs sm:text-sm rounded-xl sm:rounded-2xl shadow-md transition shadow-emerald-600/30">
+                    <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold text-xs sm:text-sm rounded-xl sm:rounded-2xl shadow-md transition shadow-orange-600/30">
                         <span>Cari Mitra</span>
                     </button>
                 </div>
@@ -55,7 +55,7 @@
             @if ($search || $filterJenis)
                 <div class="mt-3 flex items-center justify-center gap-2 text-xs text-slate-300">
                     <span>Hasil untuk: <strong>"{{ $search ?: $filterJenis }}"</strong></span>
-                    <a href="{{ route('home') }}#katalog" class="text-emerald-400 hover:underline ml-1 font-semibold">
+                    <a href="{{ route('home') }}#katalog" class="text-orange-400 hover:underline ml-1 font-semibold">
                         [Hapus Filter]
                     </a>
                 </div>
@@ -69,11 +69,11 @@
                 <span class="text-xs text-slate-400">Mitra Terverifikasi</span>
             </div>
             <div class="p-3">
-                <span class="block text-2xl sm:text-3xl font-extrabold text-emerald-400 mb-0.5">100%</span>
+                <span class="block text-2xl sm:text-3xl font-extrabold text-orange-400 mb-0.5">100%</span>
                 <span class="text-xs text-slate-400">Binaan Resmi PKM</span>
             </div>
             <div class="p-3">
-                <span class="block text-2xl sm:text-3xl font-extrabold text-teal-300 mb-0.5">Direct</span>
+                <span class="block text-2xl sm:text-3xl font-extrabold text-amber-300 mb-0.5">Direct</span>
                 <span class="text-xs text-slate-400">Pesan via WhatsApp</span>
             </div>
         </div>
@@ -86,7 +86,7 @@
     <!-- Section Heading & Filter -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>
-            <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400 mb-1">
                 <i class="fa-solid fa-cubes"></i> Direktori Etalase
             </div>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Katalog Mitra PKM Terverifikasi</h2>
@@ -96,7 +96,7 @@
         <!-- Filter Category Tabs -->
         <div class="flex items-center gap-2 text-xs font-semibold overflow-x-auto pb-1">
             <a href="{{ route('home', ['q' => $search]) }}#katalog"
-               class="px-4 py-2 rounded-xl transition whitespace-nowrap {{ empty($filterJenis) ? 'bg-slate-900 text-white dark:bg-emerald-600 dark:text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700' }}">
+               class="px-4 py-2 rounded-xl transition whitespace-nowrap {{ empty($filterJenis) ? 'bg-slate-900 text-white dark:bg-orange-600 dark:text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700' }}">
                 Semua Mitra
             </a>
             <a href="{{ route('home', ['jenis' => 'umkm', 'q' => $search]) }}#katalog"
@@ -125,11 +125,11 @@
                 @endif
             </p>
             @if ($search || $filterJenis)
-                <a href="{{ route('home') }}#katalog" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition">
+                <a href="{{ route('home') }}#katalog" class="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition">
                     <i class="fa-solid fa-rotate-left"></i> Lihat Semua Mitra
                 </a>
             @else
-                <a href="{{ route('register') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition">
+                <a href="{{ route('register') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition">
                     <i class="fa-solid fa-plus-circle"></i> Daftar sebagai Mitra
                 </a>
             @endif
@@ -139,11 +139,11 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             @foreach ($mitras as $mitra)
                 <a href="{{ route('mitra.show', ['slug' => $mitra->slug]) }}"
-                   class="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-emerald-300 dark:hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+                   class="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-orange-300 dark:hover:border-orange-500 transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
 
                     <div>
                         <!-- Cover Image with Gradient Mask -->
-                        <div class="h-44 sm:h-48 bg-gradient-to-tr from-slate-900 via-emerald-950 to-slate-900 relative overflow-hidden">
+                        <div class="h-44 sm:h-48 bg-gradient-to-tr from-slate-900 via-orange-950 to-slate-900 relative overflow-hidden">
                             @if ($mitra->websiteContent?->hero_image)
                                 <img src="{{ Str::startsWith($mitra->websiteContent->hero_image, 'http') ? $mitra->websiteContent->hero_image : asset('storage/' . $mitra->websiteContent->hero_image) }}"
                                      alt="{{ $mitra->nama_usaha }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
@@ -163,7 +163,7 @@
                             </div>
 
                             <div class="absolute top-3 right-3">
-                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500 text-slate-950 shadow-sm">
+                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-orange-500 text-slate-950 shadow-sm">
                                     <i class="fa-solid fa-circle-check text-[10px]"></i> Binaan PKM
                                 </span>
                             </div>
@@ -176,19 +176,19 @@
                                     <img src="{{ asset('storage/' . $mitra->logo) }}" alt="{{ $mitra->nama_usaha }}"
                                          class="w-16 h-16 rounded-2xl object-cover bg-white dark:bg-slate-800 p-1 ring-4 ring-white dark:ring-slate-900 shadow-md">
                                 @else
-                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white font-black text-2xl flex items-center justify-center ring-4 ring-white dark:ring-slate-900 shadow-md">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-orange-600 to-amber-500 text-white font-black text-2xl flex items-center justify-center ring-4 ring-white dark:ring-slate-900 shadow-md">
                                         {{ substr($mitra->nama_usaha, 0, 2) }}
                                     </div>
                                 @endif
 
                                 <span class="text-xs text-slate-400 dark:text-slate-400 font-semibold flex items-center gap-1 bg-slate-50 dark:bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-100 dark:border-slate-700">
-                                    <i class="fa-solid fa-boxes-stacked text-emerald-600 dark:text-emerald-400"></i>
+                                    <i class="fa-solid fa-boxes-stacked text-orange-600 dark:text-orange-400"></i>
                                     {{ $mitra->products->count() }} Produk
                                 </span>
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition tracking-tight mb-1.5 line-clamp-1">
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition tracking-tight mb-1.5 line-clamp-1">
                                 {{ $mitra->nama_usaha }}
                             </h3>
 
@@ -199,7 +199,7 @@
 
                             <!-- Address Row -->
                             <div class="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500 truncate">
-                                <i class="fa-solid fa-location-dot text-emerald-600 dark:text-emerald-400 shrink-0"></i>
+                                <i class="fa-solid fa-location-dot text-orange-600 dark:text-orange-400 shrink-0"></i>
                                 <span class="truncate">{{ $mitra->alamat }}</span>
                             </div>
                         </div>
@@ -207,11 +207,11 @@
 
                     <!-- Card Action Footer -->
                     <div class="p-4 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-                        <span class="font-bold text-slate-700 dark:text-slate-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition flex items-center gap-1">
+                        <span class="font-bold text-slate-700 dark:text-slate-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition flex items-center gap-1">
                             Buka Website <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                         </span>
-                        <span class="text-emerald-700 dark:text-emerald-300 font-bold bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 rounded-md text-[11px] inline-flex items-center gap-1 border border-emerald-200 dark:border-emerald-800/50">
-                            <i class="fa-brands fa-whatsapp text-emerald-600 dark:text-emerald-400"></i> Direct WA
+                        <span class="text-orange-700 dark:text-orange-300 font-bold bg-orange-100 dark:bg-orange-950/60 px-2.5 py-1 rounded-md text-[11px] inline-flex items-center gap-1 border border-orange-200 dark:border-orange-800/50">
+                            <i class="fa-brands fa-whatsapp text-orange-600 dark:text-orange-400"></i> Direct WA
                         </span>
                     </div>
 
@@ -230,9 +230,9 @@
 <!-- CALL TO ACTION: AJAKAN BERGABUNG -->
 <section id="tentang-pkm" class="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-16 sm:py-20 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-emerald-950 via-teal-950 to-slate-900 rounded-3xl p-8 sm:p-14 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-emerald-900/40">
+        <div class="bg-gradient-to-r from-orange-950 via-amber-950 to-slate-900 rounded-3xl p-8 sm:p-14 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-orange-900/40">
             <div class="max-w-2xl text-center lg:text-left">
-                <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider border border-emerald-400/30 mb-3 inline-block">
+                <span class="px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 text-xs font-bold uppercase tracking-wider border border-orange-400/30 mb-3 inline-block">
                     Inisiatif Pemberdayaan PKM
                 </span>
                 <h3 class="text-2xl sm:text-3xl font-extrabold mb-3 leading-snug">
@@ -243,7 +243,7 @@
                 </p>
             </div>
             <div class="shrink-0 flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-                <a href="{{ route('register') }}" class="px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl text-center shadow-lg transition shadow-emerald-500/30">
+                <a href="{{ route('register') }}" class="px-6 py-3.5 bg-gradient-to-r from-orange-500 to-amber-400 hover:from-orange-400 hover:to-amber-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl text-center shadow-lg transition shadow-orange-500/30">
                     <i class="fa-solid fa-plus-circle mr-1.5"></i> Daftar sebagai Mitra
                 </a>
                 <a href="{{ route('login') }}" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm rounded-xl text-center border border-white/20 transition">

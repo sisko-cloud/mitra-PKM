@@ -29,17 +29,17 @@
                     },
                     colors: {
                         brand: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            200: '#a7f3d0',
-                            300: '#6ee7b7',
-                            400: '#34d399',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b',
-                            950: '#022c22',
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                            950: '#431407',
                         }
                     }
                 }
@@ -55,7 +55,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="font-sans antialiased bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white transition-colors duration-200"
+<body class="font-sans antialiased bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col selection:bg-orange-500 selection:text-white transition-colors duration-200"
       x-data="{ 
           isDark: document.documentElement.classList.contains('dark'),
           toggleTheme() {
@@ -84,7 +84,7 @@
 
     <!-- Alert Messages (Flash) -->
     <div class="w-full px-4 sm:px-6 lg:px-8 pt-6">
-        @if (session('success'))
+        @if (session('success')) 
             <div x-data="{ show: true }" x-show="show" class="mb-4 flex items-center justify-between p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 rounded-xl shadow-xs">
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400 text-lg"></i>
@@ -148,7 +148,7 @@
         <div class="w-full px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
             <span>&copy; {{ date('Y') }} <strong>Mitra PKM</strong> - Platform Digitalisasi UMKM & Koperasi</span>
             <div class="flex items-center gap-4">
-                <a href="{{ route('home') }}" target="_blank" class="text-emerald-600 dark:text-emerald-400 hover:underline">
+                <a href="{{ route('home') }}" target="_blank" class="text-orange-600 dark:text-orange-400 hover:underline">
                     <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Lihat Portal Publik
                 </a>
             </div>

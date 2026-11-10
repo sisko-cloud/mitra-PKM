@@ -7,14 +7,14 @@
 
     <!-- Breadcrumb & Top Bar -->
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <a href="{{ route('owner.dashboard') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-emerald-600 transition">
+        <a href="{{ route('owner.dashboard') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition">
             <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
         </a>
         <div class="flex items-center gap-3">
-            <a href="{{ route('owner.preview') }}#produk" target="_blank" class="text-xs font-semibold text-emerald-600 hover:underline">
+            <a href="{{ route('owner.preview') }}#produk" target="_blank" class="text-xs font-semibold text-orange-600 hover:underline">
                 <i class="fa-regular fa-eye mr-1"></i> Pratinjau Etalase
             </a>
-            <a href="{{ route('owner.products.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md shadow-emerald-600/20 transition">
+            <a href="{{ route('owner.products.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md shadow-orange-600/20 transition">
                 <i class="fa-solid fa-plus"></i> Tambah Produk Baru
             </a>
         </div>
@@ -39,7 +39,7 @@
                 </div>
                 <h3 class="text-base font-bold text-slate-800">Belum Ada Produk Ditambahkan</h3>
                 <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-6">Mulai isi etalase promosi Anda dengan menambahkan produk unggulan pertama.</p>
-                <a href="{{ route('owner.products.create') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition">
+                <a href="{{ route('owner.products.create') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition">
                     <i class="fa-solid fa-plus"></i> Tambah Produk Pertama
                 </a>
             </div>
@@ -66,7 +66,7 @@
                             <!-- Info Produk -->
                             <div class="p-4">
                                 <h3 class="font-bold text-slate-900 text-sm mb-1 line-clamp-1">{{ $product->nama }}</h3>
-                                <div class="text-emerald-700 font-extrabold text-sm mb-2">
+                                <div class="text-orange-700 font-extrabold text-sm mb-2">
                                     @if ($product->harga)
                                         Rp {{ number_format($product->harga, 0, ',', '.') }}
                                     @else
@@ -81,7 +81,7 @@
 
                         <!-- Action Buttons -->
                         <div class="p-4 pt-0 border-t border-slate-100 mt-3 flex items-center justify-between gap-2">
-                            <a href="{{ route('owner.products.edit', $product->id) }}" class="flex-1 text-center py-2 px-3 rounded-lg bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 text-xs font-semibold border border-slate-200 transition">
+                            <a href="{{ route('owner.products.edit', $product->id) }}" class="flex-1 text-center py-2 px-3 rounded-lg bg-slate-50 hover:bg-orange-50 text-slate-700 hover:text-orange-700 text-xs font-semibold border border-slate-200 transition">
                                 <i class="fa-solid fa-pen text-[10px] mr-1"></i> Ubah
                             </a>
                             <form method="POST" action="{{ route('owner.products.destroy', $product->id) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">

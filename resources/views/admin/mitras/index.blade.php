@@ -13,14 +13,14 @@
         </div>
 
         <form method="GET" action="{{ route('admin.mitras.index') }}" class="flex items-center gap-2">
-            <select name="jenis" onchange="this.form.submit()" class="text-xs border border-slate-300 rounded-xl py-2 px-3 focus:ring-emerald-500">
+            <select name="jenis" onchange="this.form.submit()" class="text-xs border border-slate-300 rounded-xl py-2 px-3 focus:ring-orange-500">
                 <option value="">Semua Jenis</option>
                 <option value="umkm" {{ $jenis === 'umkm' ? 'selected' : '' }}>UMKM</option>
                 <option value="koperasi" {{ $jenis === 'koperasi' ? 'selected' : '' }}>Koperasi</option>
             </select>
             <div class="relative">
                 <input type="text" name="q" value="{{ $search }}" placeholder="Cari nama usaha, slug, alamat..."
-                    class="w-56 sm:w-72 pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-emerald-500 focus:border-emerald-500">
+                    class="w-56 sm:w-72 pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-orange-500 focus:border-orange-500">
                 <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-slate-400"></i>
             </div>
             <button type="submit" class="px-3 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-slate-800 transition">
@@ -57,13 +57,13 @@
                                         @if ($mitra->logo)
                                             <img src="{{ asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-9 h-9 rounded-lg object-cover border border-slate-200 shrink-0">
                                         @else
-                                            <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0">
+                                            <div class="w-9 h-9 rounded-lg bg-orange-100 text-orange-800 font-bold text-xs flex items-center justify-center shrink-0">
                                                 {{ substr($mitra->nama_usaha, 0, 2) }}
                                             </div>
                                         @endif
                                         <div>
                                             <span class="font-bold text-slate-900 block text-sm">{{ $mitra->nama_usaha }}</span>
-                                            <a href="{{ route('mitra.show', ['slug' => $mitra->slug]) }}" target="_blank" class="text-emerald-600 hover:underline font-mono text-[11px] inline-flex items-center gap-1">
+                                            <a href="{{ route('mitra.show', ['slug' => $mitra->slug]) }}" target="_blank" class="text-orange-600 hover:underline font-mono text-[11px] inline-flex items-center gap-1">
                                                 /mitra/{{ $mitra->slug }} <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
                                             </a>
                                         </div>
@@ -81,8 +81,8 @@
                                     <form method="POST" action="{{ route('admin.mitras.update-order', $mitra->id) }}" class="flex items-center gap-1.5">
                                         @csrf
                                         <input type="number" name="urutan_tampil" value="{{ $mitra->urutan_tampil }}" min="0"
-                                            class="w-16 px-2 py-1 border border-slate-300 rounded text-xs font-semibold text-center focus:ring-emerald-500">
-                                        <button type="submit" title="Simpan urutan" class="p-1 text-slate-500 hover:text-emerald-600">
+                                            class="w-16 px-2 py-1 border border-slate-300 rounded text-xs font-semibold text-center focus:ring-orange-500">
+                                        <button type="submit" title="Simpan urutan" class="p-1 text-slate-500 hover:text-orange-600">
                                             <i class="fa-solid fa-check"></i>
                                         </button>
                                     </form>
@@ -93,7 +93,7 @@
                                     <form method="POST" action="{{ route('admin.mitras.toggle-visibility', $mitra->id) }}">
                                         @csrf
                                         @if ($mitra->is_visible_on_home)
-                                            <button type="submit" title="Klik untuk menyembunyikan dari beranda" class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition">
+                                            <button type="submit" title="Klik untuk menyembunyikan dari beranda" class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-orange-100 text-orange-800 hover:bg-orange-200 transition">
                                                 <i class="fa-solid fa-eye mr-1"></i> Tampil
                                             </button>
                                         @else
@@ -110,7 +110,7 @@
                                         @csrf
                                         @if ($mitra->is_active)
                                             <button type="submit" onclick="return confirm('Nonaktifkan mitra ini? Halaman website promosi dan kartu etalase akan ditangguhkan.');"
-                                                class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500 text-white hover:bg-emerald-600 transition shadow-xs">
+                                                class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-orange-500 text-white hover:bg-orange-600 transition shadow-xs">
                                                 <i class="fa-solid fa-circle-check mr-1"></i> Aktif
                                             </button>
                                         @else

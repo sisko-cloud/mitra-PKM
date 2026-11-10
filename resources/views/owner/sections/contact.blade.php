@@ -7,10 +7,10 @@
 
     <!-- Breadcrumb & Back -->
     <div class="mb-6 flex items-center justify-between">
-        <a href="{{ route('owner.dashboard') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-emerald-600 transition">
+        <a href="{{ route('owner.dashboard') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition">
             <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
         </a>
-        <a href="{{ route('owner.preview') }}#kontak" target="_blank" class="text-xs font-semibold text-emerald-600 hover:underline">
+        <a href="{{ route('owner.preview') }}#kontak" target="_blank" class="text-xs font-semibold text-orange-600 hover:underline">
             <i class="fa-regular fa-eye mr-1"></i> Pratinjau Section Ini
         </a>
     </div>
@@ -30,19 +30,19 @@
             @csrf
 
             <!-- WhatsApp Direct Conversion (Primary) -->
-            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
-                <label for="whatsapp" class="block text-xs font-bold uppercase tracking-wider text-emerald-900 mb-1.5">
+            <div class="p-4 bg-orange-50 border border-orange-200 rounded-xl">
+                <label for="whatsapp" class="block text-xs font-bold uppercase tracking-wider text-orange-900 mb-1.5">
                     Nomor WhatsApp Direct <span class="text-rose-500">* (Wajib untuk Tombol Konversi)</span>
                 </label>
                 <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-emerald-700 font-bold text-sm">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-orange-700 font-bold text-sm">
                         <i class="fa-brands fa-whatsapp text-lg mr-1.5"></i> +62
                     </div>
                     <input id="whatsapp" type="text" name="whatsapp" value="{{ old('whatsapp', $contact->whatsapp ?? $mitra->kontak) }}" required
                         placeholder="81234567890"
-                        class="block w-full pl-24 pr-3.5 py-2.5 border border-emerald-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white transition">
+                        class="block w-full pl-24 pr-3.5 py-2.5 border border-orange-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white transition">
                 </div>
-                <p class="text-[11px] text-emerald-800 mt-1.5">
+                <p class="text-[11px] text-orange-800 mt-1.5">
                     Nomor ini menjadi tautan otomatis tombol "Hubungi Penjual via WhatsApp" di setiap kartu produk dan tombol melayang (floating WA) di website promosi Anda.
                 </p>
             </div>
@@ -55,7 +55,7 @@
                     </label>
                     <input id="telepon" type="text" name="telepon" value="{{ old('telepon', $contact->telepon) }}"
                         placeholder="Contoh: 021-7208899"
-                        class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                        class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
                 </div>
 
                 <div>
@@ -64,7 +64,7 @@
                     </label>
                     <input id="email" type="email" name="email" value="{{ old('email', $contact->email ?? $mitra->user?->email) }}"
                         placeholder="halo@usaha.com"
-                        class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                        class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                 </label>
                 <input id="jam_operasional" type="text" name="jam_operasional" value="{{ old('jam_operasional', $contact->jam_operasional ?? 'Senin - Sabtu: 08:00 - 17:00 WIB') }}"
                     placeholder="Contoh: Setiap Hari: 09:00 - 21:00 WIB"
-                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">
             </div>
 
             <!-- Alamat Lengkap Fisik -->
@@ -84,7 +84,7 @@
                     Alamat Lengkap Usaha / Gerai
                 </label>
                 <textarea id="alamat" name="alamat" rows="2"
-                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">{{ old('alamat', $contact->alamat ?? $mitra->alamat) }}</textarea>
+                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">{{ old('alamat', $contact->alamat ?? $mitra->alamat) }}</textarea>
             </div>
 
             <!-- Media Sosial -->
@@ -97,7 +97,7 @@
                         </label>
                         <input id="instagram" type="text" name="instagram" value="{{ old('instagram', $contact->instagram) }}"
                             placeholder="@nama_usaha"
-                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-emerald-500 focus:border-emerald-500">
+                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-orange-500 focus:border-orange-500">
                     </div>
 
                     <div>
@@ -106,7 +106,7 @@
                         </label>
                         <input id="facebook" type="text" name="facebook" value="{{ old('facebook', $contact->facebook) }}"
                             placeholder="Halaman Usaha"
-                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-emerald-500 focus:border-emerald-500">
+                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-orange-500 focus:border-orange-500">
                     </div>
 
                     <div>
@@ -115,7 +115,7 @@
                         </label>
                         <input id="tiktok" type="text" name="tiktok" value="{{ old('tiktok', $contact->tiktok) }}"
                             placeholder="@nama_tiktok"
-                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-emerald-500 focus:border-emerald-500">
+                            class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-orange-500 focus:border-orange-500">
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@
                 </label>
                 <textarea id="maps_embed" name="maps_embed" rows="3"
                     placeholder="Tempelkan URL embed Google Maps atau kode &lt;iframe src=&quot;https://www.google.com/maps/embed?...&quot;&gt;&lt;/iframe&gt;..."
-                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-mono placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">{{ old('maps_embed', $contact->maps_embed) }}</textarea>
+                    class="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-mono placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition">{{ old('maps_embed', $contact->maps_embed) }}</textarea>
                 <p class="text-[11px] text-slate-500 mt-1">
                     Buka Google Maps &rarr; Cari lokasi usaha Anda &rarr; Klik Bagikan (Share) &rarr; Pilih "Sematkan peta" (Embed a map) &rarr; Salin URL atau kode iframe ke kolom ini.
                 </p>
@@ -138,7 +138,7 @@
                 <a href="{{ route('owner.dashboard') }}" class="px-4 py-2.5 border border-slate-300 rounded-xl text-slate-700 text-xs font-semibold hover:bg-slate-50 transition">
                     Batal
                 </a>
-                <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-emerald-600/30">
+                <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-orange-600/30">
                     <i class="fa-solid fa-floppy-disk"></i> Simpan Section Kontak
                 </button>
             </div>

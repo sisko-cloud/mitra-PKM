@@ -48,13 +48,13 @@
                     },
                     colors: {
                         brand: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b',
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
                         }
                     }
                 }
@@ -75,7 +75,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="font-sans antialiased bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 selection:bg-emerald-600 selection:text-white transition-colors duration-200"
+<body class="font-sans antialiased bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 selection:bg-orange-500 selection:text-white transition-colors duration-200"
       x-data="{ 
           mobileNav: false,
           isDark: document.documentElement.classList.contains('dark'),
@@ -114,16 +114,16 @@
                     @if ($mitra->logo)
                         <img src="{{ asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl object-cover border border-slate-200 dark:border-slate-700 shadow-xs">
                     @else
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-black text-lg shadow-sm">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-orange-600 to-amber-500 text-white flex items-center justify-center font-black text-lg shadow-sm">
                             {{ substr($mitra->nama_usaha, 0, 2) }}
                         </div>
                     @endif
                     <div>
-                        <span class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight block leading-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition">
+                        <span class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight block leading-tight group-hover:text-orange-600 dark:group-hover:text-orange-400 transition">
                             {{ $mitra->nama_usaha }}
                         </span>
                         <div class="flex items-center gap-1.5 -mt-0.5">
-                            <span class="text-[10px] uppercase font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/60 px-1.5 py-0.2 rounded">
+                            <span class="text-[10px] uppercase font-bold text-orange-700 dark:text-orange-300 bg-orange-100 dark:bg-orange-950/60 px-1.5 py-0.2 rounded">
                                 {{ $mitra->jenis }}
                             </span>
                             <span class="text-[10px] text-slate-400 font-medium">Binaan PKM</span>
@@ -133,10 +133,10 @@
 
                 <!-- 4 Sections Nav Links (Desktop) -->
                 <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600 dark:text-slate-300">
-                    <a href="#beranda" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Beranda</a>
-                    <a href="#tentang" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Tentang Kami</a>
-                    <a href="#produk" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Katalog Produk</a>
-                    <a href="#kontak" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Kontak & Lokasi</a>
+                    <a href="#beranda" class="hover:text-orange-600 dark:hover:text-orange-400 transition">Beranda</a>
+                    <a href="#tentang" class="hover:text-orange-600 dark:hover:text-orange-400 transition">Tentang Kami</a>
+                    <a href="#produk" class="hover:text-orange-600 dark:hover:text-orange-400 transition">Katalog Produk</a>
+                    <a href="#kontak" class="hover:text-orange-600 dark:hover:text-orange-400 transition">Kontak & Lokasi</a>
                 </nav>
 
                 <!-- Actions Right -->
@@ -152,13 +152,13 @@
                     @if ($waNumber)
                         <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode('Halo ' . $mitra->nama_usaha . ', saya melihat website promosi Anda dan ingin bertanya mengenai produk.') }}"
                            target="_blank"
-                           class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-emerald-600/20">
+                           class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-orange-600/20">
                             <i class="fa-brands fa-whatsapp text-base"></i>
                             <span>Hubungi Kami</span>
                         </a>
                     @endif
 
-                    <a href="{{ route('home') }}" class="text-xs text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium hidden lg:inline-flex items-center gap-1 border-l pl-3 ml-2 border-slate-200 dark:border-slate-800">
+                    <a href="{{ route('home') }}" class="text-xs text-slate-500 dark:text-slate-400 hover:text-orange-600 dark:hover:text-orange-400 font-medium hidden lg:inline-flex items-center gap-1 border-l pl-3 ml-2 border-slate-200 dark:border-slate-800">
                         <i class="fa-solid fa-arrow-left text-[10px]"></i> Portal PKM
                     </a>
 
@@ -174,13 +174,13 @@
 
         <!-- Mobile Drawer -->
         <div x-show="mobileNav" x-cloak class="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3 space-y-2 text-sm font-semibold shadow-lg">
-            <a href="#beranda" @click="mobileNav = false" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400">Beranda</a>
-            <a href="#tentang" @click="mobileNav = false" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400">Tentang Kami</a>
-            <a href="#produk" @click="mobileNav = false" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400">Katalog Produk</a>
-            <a href="#kontak" @click="mobileNav = false" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400">Kontak & Lokasi</a>
+            <a href="#beranda" @click="mobileNav = false" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400">Beranda</a>
+            <a href="#tentang" @click="mobileNav = false" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400">Tentang Kami</a>
+            <a href="#produk" @click="mobileNav = false" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400">Katalog Produk</a>
+            <a href="#kontak" @click="mobileNav = false" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400">Kontak & Lokasi</a>
             @if ($waNumber)
                 <div class="pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <a href="https://wa.me/{{ $waNumber }}" target="_blank" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-emerald-600 text-white rounded-xl font-bold text-xs shadow-sm">
+                    <a href="https://wa.me/{{ $waNumber }}" target="_blank" class="w-full inline-flex items-center justify-center gap-2 py-2.5 bg-orange-600 text-white rounded-xl font-bold text-xs shadow-sm">
                         <i class="fa-brands fa-whatsapp text-base"></i> Hubungi via WhatsApp
                     </a>
                 </div>
@@ -197,15 +197,15 @@
                      alt="{{ $content->judul ?? $mitra->nama_usaha }}"
                      class="w-full h-full object-cover opacity-35 scale-105 transform">
             @else
-                <div class="w-full h-full bg-gradient-to-tr from-emerald-950 via-slate-900 to-slate-950 opacity-90"></div>
+                <div class="w-full h-full bg-gradient-to-tr from-orange-950 via-slate-900 to-slate-950 opacity-90"></div>
             @endif
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
         </div>
 
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-36 relative z-10 text-center">
             <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs sm:text-sm font-semibold mb-6 backdrop-blur-xs shadow-xs">
-                <i class="fa-solid fa-award text-emerald-400"></i>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/20 border border-orange-400/40 text-orange-300 text-xs sm:text-sm font-semibold mb-6 backdrop-blur-xs shadow-xs">
+                <i class="fa-solid fa-award text-orange-400"></i>
                 <span>Mitra Resmi Binaan Program Kreativitas Mahasiswa (PKM)</span>
             </div>
 
@@ -224,7 +224,7 @@
                 @if ($waNumber)
                     <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode('Halo ' . $mitra->nama_usaha . ', saya tertarik dengan produk Anda di website promosi resmi.') }}"
                        target="_blank"
-                       class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-sm sm:text-base rounded-2xl shadow-xl shadow-emerald-600/30 transition transform hover:-translate-y-0.5">
+                       class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-extrabold text-sm sm:text-base rounded-2xl shadow-xl shadow-orange-600/30 transition transform hover:-translate-y-0.5">
                         <i class="fa-brands fa-whatsapp text-xl"></i>
                         <span>Hubungi via WhatsApp</span>
                     </a>
@@ -232,7 +232,7 @@
 
                 <a href="#produk"
                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold text-sm sm:text-base rounded-2xl border border-white/20 transition">
-                    <i class="fa-solid fa-boxes-stacked text-emerald-400"></i>
+                    <i class="fa-solid fa-boxes-stacked text-orange-400"></i>
                     <span>Jelajahi Produk Kami</span>
                 </a>
             </div>
@@ -243,9 +243,9 @@
     <section id="tentang" class="py-20 sm:py-28 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Profil & Integritas Usaha</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400 mb-2 block">Profil & Integritas Usaha</span>
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Tentang {{ $mitra->nama_usaha }}</h2>
-                <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-teal-400 mx-auto mt-4 rounded-full"></div>
+                <div class="w-16 h-1 bg-gradient-to-r from-orange-500 to-amber-400 mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
@@ -254,7 +254,7 @@
                     <!-- Deskripsi Usaha -->
                     <div>
                         <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-circle-info text-emerald-600 dark:text-emerald-400 text-lg"></i>
+                            <i class="fa-solid fa-circle-info text-orange-600 dark:text-orange-400 text-lg"></i>
                             <span>Profil Usaha</span>
                         </h3>
                         <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">
@@ -264,9 +264,9 @@
 
                     <!-- Sejarah Usaha / Latar Belakang PKM -->
                     @if ($content?->sejarah)
-                        <div class="bg-slate-50 dark:bg-slate-900/60 border-l-4 border-emerald-600 dark:border-emerald-400 p-6 rounded-r-2xl border border-slate-200/60 dark:border-slate-800">
+                        <div class="bg-slate-50 dark:bg-slate-900/60 border-l-4 border-orange-600 dark:border-orange-400 p-6 rounded-r-2xl border border-slate-200/60 dark:border-slate-800">
                             <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-                                <i class="fa-solid fa-landmark text-emerald-600 dark:text-emerald-400"></i>
+                                <i class="fa-solid fa-landmark text-orange-600 dark:text-orange-400"></i>
                                 <span>Sejarah Singkat & Kemitraan PKM</span>
                             </h3>
                             <p class="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed whitespace-pre-line">
@@ -278,11 +278,11 @@
 
                 <!-- Visi & Misi Card (5 Cols) -->
                 <div class="lg:col-span-5">
-                    <div class="bg-gradient-to-br from-emerald-950 via-teal-950 to-slate-950 text-white rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden border border-emerald-900/40">
-                        <div class="absolute -right-8 -top-8 w-40 h-40 bg-emerald-500/15 rounded-full blur-2xl"></div>
+                    <div class="bg-gradient-to-br from-orange-950 via-amber-950 to-slate-950 text-white rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden border border-orange-900/40">
+                        <div class="absolute -right-8 -top-8 w-40 h-40 bg-orange-500/15 rounded-full blur-2xl"></div>
 
                         <h3 class="text-lg sm:text-xl font-extrabold mb-6 flex items-center gap-2 text-white border-b border-white/10 pb-4">
-                            <i class="fa-solid fa-bullseye text-emerald-400"></i>
+                            <i class="fa-solid fa-bullseye text-orange-400"></i>
                             <span>Visi & Misi Kami</span>
                         </h3>
 
@@ -305,7 +305,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14 pb-4 border-b border-slate-200 dark:border-slate-800">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Etalase & Katalog</span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400 mb-2 block">Etalase & Katalog</span>
                     <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Katalog Produk & Galeri Karya</h2>
                     <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Pilih produk yang Anda sukai dan pesan langsung via WhatsApp.</p>
                 </div>
@@ -323,7 +323,7 @@
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     @foreach ($mitra->products as $product)
-                        <div class="bg-white dark:bg-slate-950 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs hover:shadow-xl hover:border-emerald-300 dark:hover:border-emerald-500 transition-all duration-300 overflow-hidden flex flex-col justify-between group">
+                        <div class="bg-white dark:bg-slate-950 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xs hover:shadow-xl hover:border-orange-300 dark:hover:border-orange-500 transition-all duration-300 overflow-hidden flex flex-col justify-between group">
                             <div>
                                 <!-- Foto Produk dengan aspect ratio tetap -->
                                 <div class="h-56 sm:h-60 bg-slate-100 dark:bg-slate-900 overflow-hidden relative">
@@ -342,14 +342,14 @@
                                         @if ($product->harga)
                                             Rp {{ number_format($product->harga, 0, ',', '.') }}
                                         @else
-                                            <span class="text-xs font-semibold text-emerald-400">Hubungi Kami</span>
+                                            <span class="text-xs font-semibold text-orange-400">Hubungi Kami</span>
                                         @endif
                                     </div>
                                 </div>
 
                                 <!-- Body Info -->
                                 <div class="p-6">
-                                    <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition mb-2 line-clamp-1">
+                                    <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition mb-2 line-clamp-1">
                                         {{ $product->nama }}
                                     </h3>
                                     <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
@@ -366,7 +366,7 @@
                                     @endphp
                                     <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode($msg) }}"
                                        target="_blank"
-                                       class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-emerald-600/20 group-hover:shadow-emerald-600/30">
+                                       class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-orange-600/20 group-hover:shadow-orange-600/30">
                                         <i class="fa-brands fa-whatsapp text-base"></i>
                                         <span>Pesan via WhatsApp</span>
                                     </a>
@@ -383,9 +383,9 @@
     <section id="kontak" class="py-20 sm:py-28 bg-white dark:bg-slate-950 transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 block">Informasi & Lokasi</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400 mb-2 block">Informasi & Lokasi</span>
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Hubungi & Kunjungi Kami</h2>
-                <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-teal-400 mx-auto mt-4 rounded-full"></div>
+                <div class="w-16 h-1 bg-gradient-to-r from-orange-500 to-amber-400 mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
@@ -397,7 +397,7 @@
                     <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-5 text-xs sm:text-sm">
                         <!-- Alamat -->
                         <div class="flex items-start gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 flex items-center justify-center shrink-0 text-base">
+                            <div class="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 flex items-center justify-center shrink-0 text-base">
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
                             <div>
@@ -410,12 +410,12 @@
 
                         <!-- WhatsApp Direct -->
                         <div class="flex items-start gap-3.5">
-                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center shrink-0 text-lg shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 text-white flex items-center justify-center shrink-0 text-lg shadow-sm">
                                 <i class="fa-brands fa-whatsapp"></i>
                             </div>
                             <div>
                                 <span class="text-slate-400 dark:text-slate-500 font-bold uppercase text-[10px] block">WhatsApp Pemesanan:</span>
-                                <a href="https://wa.me/{{ $waNumber }}" target="_blank" class="font-bold text-emerald-700 dark:text-emerald-400 hover:underline block mt-0.5 text-base">
+                                <a href="https://wa.me/{{ $waNumber }}" target="_blank" class="font-bold text-orange-700 dark:text-orange-400 hover:underline block mt-0.5 text-base">
                                     +{{ $waNumber }}
                                 </a>
                             </div>
@@ -488,7 +488,7 @@
                 <div class="lg:col-span-7">
                     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xs h-full min-h-[360px] sm:min-h-[420px] flex flex-col">
                         <div class="p-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-300 flex items-center gap-2">
-                            <i class="fa-solid fa-map-location-dot text-emerald-600 dark:text-emerald-400"></i> Peta Lokasi Gerai / Usaha
+                            <i class="fa-solid fa-map-location-dot text-orange-600 dark:text-orange-400"></i> Peta Lokasi Gerai / Usaha
                         </div>
                         <div class="flex-grow bg-slate-100 dark:bg-slate-950 relative min-h-[300px]">
                             @if (!empty($contact?->maps_embed))
@@ -504,7 +504,7 @@
                                     </p>
                                     @if ($waNumber)
                                         <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode('Halo, boleh minta petunjuk arah lokasi usaha ' . $mitra->nama_usaha . '?') }}" target="_blank"
-                                           class="mt-4 px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl text-xs font-bold inline-flex items-center gap-1.5 shadow-sm">
+                                           class="mt-4 px-4 py-2 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-xl text-xs font-bold inline-flex items-center gap-1.5 shadow-sm">
                                             <i class="fa-solid fa-location-arrow"></i> Minta Petunjuk Arah via WA
                                         </a>
                                     @endif
@@ -523,7 +523,7 @@
         <aside class="fixed bottom-6 right-6 z-50 group" aria-label="Kontak WhatsApp">
             <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode('Halo ' . $mitra->nama_usaha . ', saya melihat website promosi Anda dan ingin memesan produk.') }}"
                target="_blank"
-               class="flex items-center gap-3 px-5 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-full shadow-2xl shadow-emerald-600/50 transition duration-300 transform hover:scale-105 font-bold text-sm">
+               class="flex items-center gap-3 px-5 py-3.5 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white rounded-full shadow-2xl shadow-orange-600/50 transition duration-300 transform hover:scale-105 font-bold text-sm">
                 <i class="fa-brands fa-whatsapp text-2xl animate-pulse"></i>
                 <span class="hidden sm:inline">Pesan via WhatsApp</span>
             </a>
@@ -542,8 +542,8 @@
                 <p>&copy; {{ date('Y') }} {{ $mitra->nama_usaha }}. Seluruh hak cipta dilindungi.</p>
                 <div class="flex items-center gap-2">
                     <span>Didukung oleh</span>
-                    <a href="{{ route('home') }}" class="font-bold text-white hover:text-emerald-400 transition inline-flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <a href="{{ route('home') }}" class="font-bold text-white hover:text-orange-400 transition inline-flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-orange-400"></span>
                         <span>Mitra PKM Framework</span>
                     </a>
                 </div>

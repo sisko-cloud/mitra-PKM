@@ -7,11 +7,11 @@
 
     <!-- Breadcrumb & Back -->
     <div class="mb-6 flex items-center justify-between">
-        <a href="{{ route('admin.verifications.index') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-emerald-600 transition">
+        <a href="{{ route('admin.verifications.index') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition">
             <i class="fa-solid fa-arrow-left"></i> Kembali ke Antrean Verifikasi
         </a>
         @if ($mitra->user?->isApproved())
-            <a href="{{ route('mitra.show', ['slug' => $mitra->slug]) }}" target="_blank" class="text-xs font-bold text-emerald-600 hover:underline inline-flex items-center gap-1">
+            <a href="{{ route('mitra.show', ['slug' => $mitra->slug]) }}" target="_blank" class="text-xs font-bold text-orange-600 hover:underline inline-flex items-center gap-1">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Website Promosi Mitra Live
             </a>
         @endif
@@ -41,7 +41,7 @@
                             <span class="text-xs text-slate-400">&bull; Terdaftar: {{ $mitra->created_at->format('d M Y, H:i') }}</span>
                         </div>
                         <h1 class="text-2xl font-extrabold text-slate-900">{{ $mitra->nama_usaha }}</h1>
-                        <span class="text-xs font-mono text-emerald-600">/mitra/{{ $mitra->slug }}</span>
+                        <span class="text-xs font-mono text-orange-600">/mitra/{{ $mitra->slug }}</span>
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <span class="font-bold uppercase tracking-wider text-slate-400 text-[11px] block mb-0.5">Kontak WhatsApp:</span>
-                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $mitra->kontak) }}" target="_blank" class="font-semibold text-emerald-700 hover:underline flex items-center gap-1.5">
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $mitra->kontak) }}" target="_blank" class="font-semibold text-orange-700 hover:underline flex items-center gap-1.5">
                                 <i class="fa-brands fa-whatsapp text-base"></i> {{ $mitra->kontak }}
                             </a>
                         </div>
@@ -69,21 +69,21 @@
             <!-- Card Dokumen Pendukung -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
                 <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
-                    <i class="fa-regular fa-file-lines text-emerald-600"></i> Dokumen Pendukung Pendaftaran
+                    <i class="fa-regular fa-file-lines text-orange-600"></i> Dokumen Pendukung Pendaftaran
                 </h3>
                 <p class="text-xs text-slate-500 mb-4">Berkas legalitas atau KTP yang diunggah oleh pendaftar saat registrasi.</p>
 
                 @if ($mitra->dokumen_pendukung)
                     <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-file-circle-check text-emerald-600 text-2xl"></i>
+                            <i class="fa-solid fa-file-circle-check text-orange-600 text-2xl"></i>
                             <div>
                                 <span class="font-bold text-xs text-slate-800 block">Berkas Dokumen Pendukung</span>
                                 <span class="text-[11px] text-slate-400">{{ basename($mitra->dokumen_pendukung) }}</span>
                             </div>
                         </div>
                         <a href="{{ asset('storage/' . $mitra->dokumen_pendukung) }}" target="_blank"
-                            class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg transition shadow-xs flex items-center gap-1.5">
+                            class="px-3.5 py-1.5 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs rounded-lg transition shadow-xs flex items-center gap-1.5">
                             <i class="fa-solid fa-eye text-xs"></i> Buka Dokumen
                         </a>
                     </div>
@@ -99,7 +99,7 @@
             @if ($mitra->websiteContent)
                 <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
                     <h3 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-layer-group text-emerald-600"></i> Ringkasan Template Website (4 Section)
+                        <i class="fa-solid fa-layer-group text-orange-600"></i> Ringkasan Template Website (4 Section)
                     </h3>
                     <div class="grid grid-cols-2 gap-3 text-xs">
                         <div class="p-3 bg-slate-50 rounded-xl">
@@ -129,11 +129,11 @@
                     <span class="text-xs text-slate-400 block mb-1">Status Saat Ini:</span>
                     @php $status = $mitra->user?->status ?? 'pending'; @endphp
                     @if ($status === 'approved')
-                        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 font-bold text-xs flex items-center gap-2">
-                            <i class="fa-solid fa-circle-check text-emerald-600 text-base"></i>
+                        <div class="p-3 bg-orange-50 border border-orange-200 rounded-xl text-orange-800 font-bold text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-orange-600 text-base"></i>
                             <div>
                                 <span class="block">Telah Disetujui</span>
-                                <span class="text-[10px] font-normal text-emerald-700">Template website aktif</span>
+                                <span class="text-[10px] font-normal text-orange-700">Template website aktif</span>
                             </div>
                         </div>
                     @elseif ($status === 'rejected')
@@ -158,7 +158,7 @@
                 <form method="POST" action="{{ route('admin.verifications.approve', $mitra->id) }}" class="mb-3">
                     @csrf
                     <button type="submit" onclick="return confirm('Setujui pendaftaran mitra ini? Template 4-section akan otomatis dibuat dan notifikasi dikirim.');"
-                        class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-emerald-600/20">
+                        class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition shadow-orange-600/20">
                         <i class="fa-solid fa-check"></i>
                         <span>Setujui Pendaftaran</span>
                     </button>

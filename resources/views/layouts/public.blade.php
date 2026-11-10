@@ -263,5 +263,6 @@
         </div>
     </footer>
 
+    @include('partials.password-toggle')
 </body>
 </html>

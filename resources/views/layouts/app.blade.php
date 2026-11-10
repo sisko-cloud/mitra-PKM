@@ -73,17 +73,17 @@
     <!-- Top Navigation Bar -->
     @include('layouts.navigation')
 
-    <!-- Page Heading -->
+    <!-- Page Heading (100% Full Width Screen) -->
     @if (isset($header))
         <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-xs transition-colors duration-200">
-            <div class="w-full max-w-[1800px] mx-auto py-5 px-4 sm:px-6 lg:px-10 xl:px-12">
+            <div class="w-full px-4 sm:px-6 lg:px-8 py-5">
                 {{ $header }}
             </div>
         </header>
     @endif
 
     <!-- Alert Messages (Flash) -->
-    <div class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-6">
+    <div class="w-full px-4 sm:px-6 lg:px-8 pt-6">
         @if (session('success'))
             <div x-data="{ show: true }" x-show="show" class="mb-4 flex items-center justify-between p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 rounded-xl shadow-xs">
                 <div class="flex items-center gap-3">
@@ -143,9 +143,9 @@
         {{ $slot ?? '' }}
     </main>
 
-    <!-- Footer Simple -->
+    <!-- Footer Simple (100% Full Width Screen) -->
     <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors duration-200">
-        <div class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div class="w-full px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
             <span>&copy; {{ date('Y') }} <strong>Mitra PKM</strong> - Platform Digitalisasi UMKM & Koperasi</span>
             <div class="flex items-center gap-4">
                 <a href="{{ route('home') }}" target="_blank" class="text-emerald-600 dark:text-emerald-400 hover:underline">

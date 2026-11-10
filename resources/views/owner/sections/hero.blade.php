@@ -61,7 +61,7 @@
                 <!-- Current Image Preview -->
                 @if ($content->hero_image)
                     <div class="mb-4 relative rounded-xl overflow-hidden border border-slate-200 shadow-xs max-h-64 group">
-                        <img src="{{ Str::startsWith($content->hero_image, 'http') ? $content->hero_image : asset('storage/' . $content->hero_image) }}" 
+                        <img src="{{ media_url($content->hero_image) }}"
                              alt="Gambar Sampul" class="w-full h-56 object-cover">
                         <div class="absolute bottom-2 left-2 bg-slate-900/80 backdrop-blur-xs text-white text-[11px] px-2.5 py-1 rounded-md font-semibold">
                             <i class="fa-solid fa-image mr-1"></i> Gambar Sampul Aktif Saat Ini

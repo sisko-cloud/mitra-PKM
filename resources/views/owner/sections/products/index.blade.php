@@ -51,7 +51,7 @@
                             <!-- Foto Produk -->
                             <div class="h-44 bg-slate-100 relative overflow-hidden">
                                 @if ($product->foto)
-                                    <img src="{{ Str::startsWith($product->foto, 'http') ? $product->foto : asset('storage/' . $product->foto) }}" 
+                                    <img src="{{ media_url($product->foto) }}"
                                          alt="{{ $product->nama }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center text-slate-400 bg-slate-100">

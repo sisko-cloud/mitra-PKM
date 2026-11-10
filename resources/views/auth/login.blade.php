@@ -17,17 +17,19 @@
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow-xl shadow-slate-200/50 sm:rounded-2xl sm:px-10 border border-slate-200">
             
-            <!-- Quick Demo Credentials Callout -->
-            <div class="mb-6 p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed">
-                <div class="font-bold flex items-center gap-1.5 mb-1 text-emerald-800">
-                    <i class="fa-solid fa-key"></i> Akun Bawaan untuk Pengujian:
+            @if (app()->environment('local'))
+                <!-- Quick Demo Credentials Callout (hanya tampil di lingkungan lokal) -->
+                <div class="mb-6 p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 leading-relaxed">
+                    <div class="font-bold flex items-center gap-1.5 mb-1 text-emerald-800">
+                        <i class="fa-solid fa-key"></i> Akun Bawaan untuk Pengujian Lokal:
+                    </div>
+                    <div class="space-y-0.5">
+                        <div>&bull; <strong>Superadmin:</strong> <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">admin@mitrapkm.id</code> / <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">password123</code></div>
+                        <div>&bull; <strong>Owner Disetujui:</strong> <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">owner1@kopisenopati.id</code> / <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">password123</code></div>
+                        <div>&bull; <strong>Owner Pending:</strong> <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">pending@batikprabu.com</code> / <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">password123</code></div>
+                    </div>
                 </div>
-                <div class="space-y-0.5">
-                    <div>&bull; <strong>Superadmin:</strong> <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">admin@mitrapkm.id</code> / <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">password123</code></div>
-                    <div>&bull; <strong>Owner Disetujui:</strong> <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">owner1@kopisenopati.id</code> / <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">password123</code></div>
-                    <div>&bull; <strong>Owner Pending:</strong> <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">pending@batikprabu.com</code> / <code class="bg-emerald-100 px-1 py-0.5 rounded text-emerald-900 font-mono">password123</code></div>
-                </div>
-            </div>
+            @endif
 
             <!-- Session Status & Errors -->
             @if (session('status'))
@@ -56,7 +58,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-sm">
                             <i class="fa-regular fa-envelope"></i>
                         </div>
-                        <input id="email" type="email" name="email" value="{{ old('email', 'admin@mitrapkm.id') }}" required autofocus
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
                             class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
                     </div>
                 </div>
@@ -72,7 +74,7 @@
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-sm">
                             <i class="fa-solid fa-lock"></i>
                         </div>
-                        <input id="password" type="password" name="password" value="password123" required autocomplete="current-password"
+                        <input id="password" type="password" name="password" required autocomplete="current-password"
                             class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
                     </div>
                 </div>

@@ -93,6 +93,7 @@ Route::middleware(['auth', 'superadmin'])->prefix('admin')->name('admin.')->grou
     // Verifikasi Pendaftar
     Route::get('/verifications', [AdminVerificationController::class, 'index'])->name('verifications.index');
     Route::get('/verifications/{id}', [AdminVerificationController::class, 'show'])->name('verifications.show');
+    Route::get('/verifications/{id}/document', [AdminVerificationController::class, 'document'])->name('verifications.document');
     Route::post('/verifications/{id}/approve', [AdminVerificationController::class, 'approve'])->name('verifications.approve');
     Route::post('/verifications/{id}/reject', [AdminVerificationController::class, 'reject'])->name('verifications.reject');
 

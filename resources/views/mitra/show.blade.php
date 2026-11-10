@@ -10,8 +10,8 @@
         $pageTitle = ($content?->judul ?? $mitra->nama_usaha) . ' - Website Promosi Resmi Mitra PKM';
         $pageDesc = $content?->tagline ?? $content?->deskripsi ?? 'Website promosi resmi ' . $mitra->nama_usaha . ' mitra binaan Program Kreativitas Mahasiswa (PKM).';
         $pageImage = $content?->hero_image
-            ? (Str::startsWith($content->hero_image, 'http') ? $content->hero_image : asset('storage/' . $content->hero_image))
-            : ($mitra->logo ? asset('storage/' . $mitra->logo) : asset('img/default-hero.jpg'));
+            ? media_url($content->hero_image)
+            : media_url($mitra->logo, 'img/default-hero.jpg');
         $waNumber = preg_replace('/[^0-9]/', '', $contact?->whatsapp ?? $mitra->kontak);
     @endphp
 
@@ -90,7 +90,7 @@
                 <!-- Logo & Business Name -->
                 <a href="#beranda" class="flex items-center gap-3 group shrink-0">
                     @if ($mitra->logo)
-                        <img src="{{ asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl object-cover border border-slate-200 shadow-xs">
+                        <img src="{{ media_url($mitra->logo) }}" alt="Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl object-cover border border-slate-200 shadow-xs">
                     @else
                         <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-black text-lg shadow-sm">
                             {{ substr($mitra->nama_usaha, 0, 2) }}
@@ -163,7 +163,7 @@
         <!-- Background Hero Image with Dark Gradient Overlay -->
         <div class="absolute inset-0 z-0">
             @if ($content?->hero_image)
-                <img src="{{ Str::startsWith($content->hero_image, 'http') ? $content->hero_image : asset('storage/' . $content->hero_image) }}"
+                <img src="{{ media_url($content->hero_image) }}"
                      alt="{{ $content->judul ?? $mitra->nama_usaha }}"
                      class="w-full h-full object-cover opacity-35 scale-105 transform">
             @else
@@ -298,7 +298,7 @@
                                 <!-- Foto Produk dengan aspect ratio tetap -->
                                 <div class="h-56 sm:h-60 bg-slate-100 overflow-hidden relative">
                                     @if ($product->foto)
-                                        <img src="{{ Str::startsWith($product->foto, 'http') ? $product->foto : asset('storage/' . $product->foto) }}"
+                                        <img src="{{ media_url($product->foto) }}"
                                              alt="{{ $product->nama }}"
                                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                     @else

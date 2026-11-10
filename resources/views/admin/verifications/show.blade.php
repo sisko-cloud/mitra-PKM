@@ -27,7 +27,7 @@
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
                 <div class="flex items-start gap-4 pb-6 border-b border-slate-200 mb-6">
                     @if ($mitra->logo)
-                        <img src="{{ asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-16 h-16 rounded-xl object-cover border border-slate-200 shadow-xs">
+                        <img src="{{ media_url($mitra->logo) }}" alt="Logo" class="w-16 h-16 rounded-xl object-cover border border-slate-200 shadow-xs">
                     @else
                         <div class="w-16 h-16 rounded-xl bg-slate-100 text-slate-500 font-extrabold text-2xl flex items-center justify-center shrink-0 border border-slate-200">
                             {{ substr($mitra->nama_usaha, 0, 2) }}
@@ -82,7 +82,7 @@
                                 <span class="text-[11px] text-slate-400">{{ basename($mitra->dokumen_pendukung) }}</span>
                             </div>
                         </div>
-                        <a href="{{ asset('storage/' . $mitra->dokumen_pendukung) }}" target="_blank"
+                        <a href="{{ route('admin.verifications.document', $mitra->id) }}" target="_blank"
                             class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg transition shadow-xs flex items-center gap-1.5">
                             <i class="fa-solid fa-eye text-xs"></i> Buka Dokumen
                         </a>

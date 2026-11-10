@@ -38,6 +38,7 @@
     "CACHE_DRIVER": "array",
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie",
+    "SESSION_SECURE_COOKIE": "true",
     "DB_CONNECTION": "pgsql",
     "DB_PORT": "5432",
     "DB_SSLMODE": "require"

@@ -56,12 +56,14 @@ Platform web modern yang berfungsi sebagai direktori publik sekaligus penyedia w
 - **Frontend**: Blade + Tailwind CSS (Vite Build & CDN Fallback) + Alpine.js
 - **Icons**: Font Awesome 6.5
 - **Autentikasi**: Laravel Breeze (Blade Stack) dengan Role-Based Access Control (RBAC)
-- **Storage**: Laravel Public Disk (`storage/app/public` melalui *junction link* `public/storage`)
+- **Storage**: Vercel Blob (produksi) + disk lokal/privat (development). Gambar publik memakai store *public*, dokumen KTP/legalitas memakai store *private*.
 - **Bahasa UI**: 100% Bahasa Indonesia
 
 ---
 
 ## 🔑 Akun Bawaan (Default Credentials)
+
+> ⚠️ **Penting untuk produksi:** kredensial demo di bawah hanya untuk pengembangan lokal. Halaman login tidak lagi menampilkan/mengisinya otomatis saat `APP_ENV=production`. Tetap ganti password superadmin setelah deploy.
 
 Sistem telah dilengkapi dengan *seeder* akun bawaan untuk pengujian instan:
 
@@ -120,22 +122,48 @@ php artisan serve
 ```
 Buka browser di: **`http://localhost:8000`**
 
+Tanpa `BLOB_READ_WRITE_TOKEN`, upload akan disimpan di disk lokal (`public` untuk gambar, `local` untuk dokumen) sehingga cocok untuk pengembangan.
+
+---
+
+## ☁️ Deployment ke Vercel
+
+1. Import repo ke Vercel (framework: *Other*, output directory: `public`).
+2. Set *Environment Variables* di project Vercel:
+
+   | Variable | Contoh / Keterangan |
+   |---|---|
+   | `APP_KEY` | hasil `php artisan key:generate --show` |
+   | `APP_URL` | `https://mitra-pkm.vercel.app` |
+   | `DB_CONNECTION` | `pgsql` |
+   | `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` | kredensial Neon PostgreSQL |
+   | `DB_SSLMODE` | `require` |
+   | `SESSION_SECURE_COOKIE` | `true` |
+   | `BLOB_READ_WRITE_TOKEN` | token store Blob **public** (gambar) |
+   | `BLOB_READ_WRITE_TOKEN_PRIVATE` | token store Blob **private** (dokumen) |
+
+3. Buat **dua** Blob store di Vercel → Storage → Blob:
+   - Store **public** untuk logo, hero, dan foto produk.
+   - Store **private** untuk dokumen pendukung (KTP/legalitas).
+   Mode akses store permanen dan tidak bisa diubah setelah dibuat.
+4. Jalankan migrasi ke database produksi dari mesin lokal:
+   ```bash
+   DB_CONNECTION=pgsql DB_HOST=... DB_DATABASE=... DB_USERNAME=... DB_PASSWORD=... \
+     php artisan migrate --force
+   ```
+5. Tanpa kedua token Blob, file hanya tersimpan di `/tmp` dan akan hilang saat serverless *cold start*.
+
 ---
 
 ## 🧪 Pengujian Otomatis (Automated Testing)
 
 Semua kriteria sukses *end-to-end* telah diuji dengan PHPUnit:
 ```bash
-php artisan test --filter=MitraPkmFlowTest
+php artisan test
 ```
-Hasil uji:
-- `✓ owner registers pending and cannot access editor`
-- `✓ superadmin approves and website template auto generated`
-- `✓ owner edits sections previews and publishes`
-- `✓ public can view promotional website and card on homepage`
-- `✓ superadmin suspends mitra hidden from home and 404 public`
+Mencakup alur utama (`MitraPkmFlowTest`), keamanan storage/dokumen, serta test bawaan Laravel Breeze.
 
-**Status Pengujian:** 5/5 PASSED (39 assertions, 0 failures).
+**Status Pengujian:** 37 PASSED (117 assertions, 0 failures).
 
 ---
 
@@ -229,6 +257,8 @@ mitra-pkm/
 - Password di-hash menggunakan algoritma Bcrypt bawaan Laravel.
 - Perlindungan CSRF aktif pada seluruh formulir POST/PUT/DELETE.
 - Validasi berkas unggahan: format JPG, JPEG, PNG, WEBP dengan batasan ukuran berkas maksimum 2 MB per file.
-- Otomatisasi penghapusan berkas lama dari media penyimpanan lokal (*disk public*) saat foto sampul, logo, atau produk diperbarui.
+- Otomatisasi penghapusan berkas lama dari media penyimpanan (disk lokal maupun Vercel Blob) saat foto sampul, logo, atau produk diperbarui.
+- Dokumen pendukung (KTP/legalitas) disimpan di disk privat / Blob privat dan hanya dapat diakses Superadmin melalui route terproteksi; route `/storage/*` hanya melayani gambar publik.
+- URL dipaksa HTTPS di production dan cookie session memakai flag `Secure` untuk mencegah *mixed content* dan kebocoran cookie.
 - Sanitasi input dan proteksi *slug reserved keywords* untuk mencegah konflik dengan rute sistem (`admin`, `owner`, `login`, `register`, `api`, dll).
 - Isolasi otorisasi: Owner hanya dapat melihat dan menyunting website miliknya sendiri melalui *relation scoping* `Auth::user()->mitra`.

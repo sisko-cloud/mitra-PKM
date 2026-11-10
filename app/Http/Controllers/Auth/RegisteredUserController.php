@@ -75,7 +75,7 @@ class RegisteredUserController extends Controller
 
             // Upload Logo & Dokumen secara aman
             $logoPath = FileUploadService::upload($request->file('logo'), 'logos');
-            $dokumenPath = FileUploadService::upload($request->file('dokumen_pendukung'), 'dokumen');
+            $dokumenPath = FileUploadService::upload($request->file('dokumen_pendukung'), 'dokumen', 'local');
 
             // Generate slug unik
             $baseSlug = Str::slug($request->nama_usaha);

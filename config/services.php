@@ -31,4 +31,14 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // Vercel Blob (penyimpanan permanen untuk deployment serverless).
+    // Gunakan dua store karena mode akses ditentukan saat store dibuat:
+    // - BLOB_READ_WRITE_TOKEN         -> store PUBLIC  (logo, hero, foto produk)
+    // - BLOB_READ_WRITE_TOKEN_PRIVATE -> store PRIVATE (dokumen KTP/legalitas)
+    'vercel_blob' => [
+        'token' => env('BLOB_READ_WRITE_TOKEN'),
+        'private_token' => env('BLOB_READ_WRITE_TOKEN_PRIVATE'),
+        'api_url' => env('VERCEL_BLOB_API_URL', 'https://vercel.com/api/blob'),
+    ],
+
 ];

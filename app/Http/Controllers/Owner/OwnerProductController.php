@@ -118,9 +118,7 @@ class OwnerProductController extends Controller
         $mitra = Auth::user()->mitra;
         $product = $mitra->products()->findOrFail($id);
 
-        if ($product->foto && Storage::disk('public')->exists($product->foto)) {
-            Storage::disk('public')->delete($product->foto);
-        }
+        FileUploadService::delete($product->foto);
 
         $nama = $product->nama;
         $product->delete();

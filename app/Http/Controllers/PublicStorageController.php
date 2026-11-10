@@ -2,35 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Illuminate\Support\Facades\Storage;
 
 class PublicStorageController extends Controller
 {
     /**
-     * Serve uploaded storage files with fallback support for serverless environments.
+     * Sajikan HANYA gambar publik (logo, hero, foto produk) untuk deployment
+     * serverless. Dokumen pendukung (KTP/legalitas) tidak pernah disajikan
+     * lewat route publik ini.
      */
     public function show(string $path)
     {
-        // Sanitize path to prevent directory traversal
+        // Sanitasi path untuk mencegah directory traversal.
         $cleanPath = str_replace(['..', '\\'], ['', '/'], $path);
         $cleanPath = ltrim($cleanPath, '/');
 
-        // 1. Check primary storage path (local / default disk)
-        $primaryPath = storage_path('app/public/' . $cleanPath);
-        if (file_exists($primaryPath) && is_file($primaryPath)) {
-            return response()->file($primaryPath);
+        // Allowlist: hanya folder gambar publik dan ekstensi gambar.
+        $isPublicImage = preg_match('#^(logos|heroes|products)/[A-Za-z0-9._-]+$#', $cleanPath)
+            && preg_match('/\.(jpg|jpeg|png|webp|gif)$/i', $cleanPath);
+
+        if (! $isPublicImage) {
+            abort(404);
         }
 
-        // 2. Check /tmp serverless storage path
+        // 1. Disk public Laravel (development / data lama).
+        try {
+            if (Storage::disk('public')->exists($cleanPath)) {
+                return response()->file(Storage::disk('public')->path($cleanPath), [
+                    'Cache-Control' => 'public, max-age=86400',
+                ]);
+            }
+        } catch (\Throwable $e) {
+            // Lanjut ke fallback /tmp.
+        }
+
+        // 2. Fallback serverless lama.
         $tmpPath = '/tmp/storage/app/public/' . $cleanPath;
-        if (file_exists($tmpPath) && is_file($tmpPath)) {
-            return response()->file($tmpPath);
+
+        if (is_file($tmpPath)) {
+            return response()->file($tmpPath, [
+                'Cache-Control' => 'public, max-age=86400',
+            ]);
         }
 
-        // 3. Fallback placeholder for images so UI doesn't break
-        if (preg_match('/\.(jpg|jpeg|png|webp|gif|svg)$/i', $cleanPath)) {
-            $svg = <<<SVG
+        // 3. Placeholder agar UI tidak menampilkan broken image.
+        $svg = <<<SVG
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
     <rect width="200" height="200" fill="#f8fafc"/>
     <circle cx="100" cy="80" r="32" fill="#cbd5e1"/>
@@ -38,12 +54,10 @@ class PublicStorageController extends Controller
     <text x="50%" y="185" dominant-baseline="middle" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#64748b">Mitra PKM</text>
 </svg>
 SVG;
-            return response($svg, 200, [
-                'Content-Type' => 'image/svg+xml',
-                'Cache-Control' => 'public, max-age=86400',
-            ]);
-        }
 
-        abort(404);
+        return response($svg, 200, [
+            'Content-Type' => 'image/svg+xml',
+            'Cache-Control' => 'public, max-age=86400',
+        ]);
     }
 }

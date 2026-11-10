@@ -72,9 +72,9 @@ class OwnerStatusController extends Controller
         // Ganti dokumen jika diunggah baru
         if ($request->hasFile('dokumen_pendukung')) {
             if ($mitra && $mitra->dokumen_pendukung) {
-                FileUploadService::delete($mitra->dokumen_pendukung);
+                FileUploadService::delete($mitra->dokumen_pendukung, 'local');
             }
-            $newDokumen = FileUploadService::upload($request->file('dokumen_pendukung'), 'dokumen');
+            $newDokumen = FileUploadService::upload($request->file('dokumen_pendukung'), 'dokumen', 'local');
             if ($newDokumen) {
                 $updateData['dokumen_pendukung'] = $newDokumen;
             }

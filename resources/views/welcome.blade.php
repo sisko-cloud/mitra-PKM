@@ -145,7 +145,7 @@
                         <!-- Cover Image with Gradient Mask -->
                         <div class="h-44 sm:h-48 bg-gradient-to-tr from-slate-900 via-emerald-950 to-slate-900 relative overflow-hidden">
                             @if ($mitra->websiteContent?->hero_image)
-                                <img src="{{ Str::startsWith($mitra->websiteContent->hero_image, 'http') ? $mitra->websiteContent->hero_image : asset('storage/' . $mitra->websiteContent->hero_image) }}"
+                                <img src="{{ media_url($mitra->websiteContent->hero_image) }}"
                                      alt="{{ $mitra->nama_usaha }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
                             @else
                                 <div class="w-full h-full flex items-center justify-center text-white/20">
@@ -173,7 +173,7 @@
                         <div class="p-6 relative">
                             <div class="-mt-12 mb-4 flex items-center justify-between">
                                 @if ($mitra->logo)
-                                    <img src="{{ asset('storage/' . $mitra->logo) }}" alt="{{ $mitra->nama_usaha }}"
+                                    <img src="{{ media_url($mitra->logo) }}" alt="{{ $mitra->nama_usaha }}"
                                          class="w-16 h-16 rounded-2xl object-cover bg-white p-1 ring-4 ring-white shadow-md">
                                 @else
                                     <div class="w-16 h-16 rounded-2xl bg-emerald-600 text-white font-black text-2xl flex items-center justify-center ring-4 ring-white shadow-md">

@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Mitra;
 use App\Notifications\OwnerStatusChangedNotification;
+use App\Services\FileUploadService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class AdminMitraController extends Controller
@@ -81,13 +81,9 @@ class AdminMitraController extends Controller
         $mitra = Mitra::with('user')->findOrFail($id);
         $nama = $mitra->nama_usaha;
 
-        // Hapus file logo dan dokumen dari disk
-        if ($mitra->logo && Storage::disk('public')->exists($mitra->logo)) {
-            Storage::disk('public')->delete($mitra->logo);
-        }
-        if ($mitra->dokumen_pendukung && Storage::disk('public')->exists($mitra->dokumen_pendukung)) {
-            Storage::disk('public')->delete($mitra->dokumen_pendukung);
-        }
+        // Hapus file logo dan dokumen (mendukung Blob maupun disk lokal)
+        FileUploadService::delete($mitra->logo);
+        FileUploadService::delete($mitra->dokumen_pendukung, 'local');
 
         // Hapus user terkait (cascades mitras, website_contents, products, contacts)
         if ($mitra->user) {

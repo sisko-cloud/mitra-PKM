@@ -12,7 +12,7 @@
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
             <div class="flex items-start sm:items-center gap-4 sm:gap-6">
                 @if ($mitra->logo)
-                    <img src="{{ asset('storage/' . $mitra->logo) }}" alt="{{ $mitra->nama_usaha }}" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover bg-white p-1 shadow-md border-2 border-emerald-400">
+                    <img src="{{ media_url($mitra->logo) }}" alt="{{ $mitra->nama_usaha }}" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover bg-white p-1 shadow-md border-2 border-emerald-400">
                 @else
                     <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-emerald-600/60 border border-emerald-400/40 text-white flex items-center justify-center font-black text-2xl shadow-md">
                         {{ substr($mitra->nama_usaha, 0, 2) }}

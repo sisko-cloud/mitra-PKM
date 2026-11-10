@@ -12,6 +12,16 @@ use Tests\TestCase;
 
 class MitraPkmFlowTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Setiap pengujian dimulai dari data awal yang konsisten.
+        $this->seed();
+    }
+
     /**
      * Uji Kriteria 1: Owner daftar, status pending, tidak bisa masuk editor.
      */
@@ -62,8 +72,14 @@ class MitraPkmFlowTest extends TestCase
     public function test_owner_registers_with_files_successfully(): void
     {
         Storage::fake('public');
+        Storage::fake('local');
 
-        $logo = UploadedFile::fake()->image('test_logo.png', 200, 200);
+        // Gunakan PNG 1x1 asli agar pengujian tidak bergantung pada ekstensi GD.
+        $logoPath = tempnam(sys_get_temp_dir(), 'logo_') . '.png';
+        file_put_contents($logoPath, base64_decode(
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Z3ZkAAAAASUVORK5CYII='
+        ));
+        $logo = new UploadedFile($logoPath, 'test_logo.png', 'image/png', null, true);
         $dokumen = UploadedFile::fake()->create('test_dokumen.pdf', 500, 'application/pdf');
 
         $response = $this->post(route('register'), [

@@ -75,7 +75,7 @@
 
                 @if ($product->foto)
                     <div class="mb-3 flex items-center gap-4 p-3 bg-slate-50 border border-slate-200 rounded-xl">
-                        <img src="{{ Str::startsWith($product->foto, 'http') ? $product->foto : asset('storage/' . $product->foto) }}" 
+                        <img src="{{ media_url($product->foto) }}"
                              alt="{{ $product->nama }}" class="w-16 h-16 object-cover rounded-lg shadow-xs">
                         <div class="text-xs text-slate-500">
                             <span class="font-bold text-slate-800 block">Foto Saat Ini</span>

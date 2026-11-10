@@ -8,6 +8,7 @@ $directories = [
     '/tmp/storage/app/public/dokumen',
     '/tmp/storage/app/public/heroes',
     '/tmp/storage/app/public/products',
+    '/tmp/storage/app/dokumen',
     '/tmp/storage/framework/cache/data',
     '/tmp/storage/framework/sessions',
     '/tmp/storage/framework/views',

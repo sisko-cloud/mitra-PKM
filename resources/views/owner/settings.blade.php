@@ -88,6 +88,7 @@
                     <span class="text-xs text-slate-500">Jika dinonaktifkan, pengunjung tidak akan dapat membuka halaman publik mitra ini.</span>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="hidden" name="is_active" value="0">
                     <input type="checkbox" name="is_active" value="1" {{ $mitra->is_active ? 'checked' : '' }} class="sr-only peer">
                     <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
                 </label>

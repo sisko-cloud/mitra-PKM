@@ -62,61 +62,75 @@ class RegisteredUserController extends Controller
             'dokumen_pendukung.max' => 'Ukuran dokumen maksimal 2 MB.',
         ]);
 
-        DB::beginTransaction();
+        $createdUser = null;
 
         try {
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role' => 'owner',
-                'status' => 'pending',
-            ]);
-
-            // Upload Logo & Dokumen secara aman
+            // 1. Upload Logo & Dokumen terlebih dahulu secara aman (di luar DB)
             $logoPath = FileUploadService::upload($request->file('logo'), 'logos');
             $dokumenPath = FileUploadService::upload($request->file('dokumen_pendukung'), 'dokumen');
 
-            // Generate slug unik
+            // 2. Generate slug unik (query read ringan)
             $baseSlug = Str::slug($request->nama_usaha);
-            $slug = $baseSlug;
+            $slug = $baseSlug ?: 'mitra-' . Str::random(6);
             $counter = 1;
             while (Mitra::where('slug', $slug)->exists()) {
                 $slug = $baseSlug . '-' . $counter++;
             }
 
-            Mitra::create([
-                'user_id' => $user->id,
-                'nama_usaha' => $request->nama_usaha,
-                'jenis' => $request->jenis,
-                'alamat' => $request->alamat,
-                'kontak' => $request->kontak,
-                'logo' => $logoPath,
-                'dokumen_pendukung' => $dokumenPath,
-                'slug' => $slug,
-                'is_active' => true,
-                'is_published' => false,
-                'is_visible_on_home' => false,
-                'urutan_tampil' => 0,
+            // 3. Simpan User akun owner
+            $createdUser = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'role' => 'owner',
+                'status' => 'pending',
             ]);
 
-            DB::commit();
+            // 4. Simpan Profil Mitra terkait
+            try {
+                Mitra::create([
+                    'user_id' => $createdUser->id,
+                    'nama_usaha' => $request->nama_usaha,
+                    'jenis' => $request->jenis,
+                    'alamat' => $request->alamat,
+                    'kontak' => $request->kontak,
+                    'logo' => $logoPath,
+                    'dokumen_pendukung' => $dokumenPath,
+                    'slug' => $slug,
+                    'is_active' => true,
+                    'is_published' => false,
+                    'is_visible_on_home' => false,
+                    'urutan_tampil' => 0,
+                ]);
+            } catch (\Throwable $mitraEx) {
+                if ($createdUser && $createdUser->exists) {
+                    $createdUser->delete();
+                }
+                throw $mitraEx;
+            }
 
             try {
-                event(new Registered($user));
+                event(new Registered($createdUser));
             } catch (\Throwable $eventEx) {
                 Log::warning('Registered event dispatch warning: ' . $eventEx->getMessage());
             }
 
             try {
-                Auth::login($user);
+                Auth::login($createdUser);
             } catch (\Throwable $authEx) {
                 Log::warning('Auth login warning during register: ' . $authEx->getMessage());
             }
 
             return redirect()->route('owner.status')->with('success', 'Pendaftaran berhasil dikirim! Akun Anda sedang dalam proses verifikasi oleh Superadmin.');
         } catch (\Throwable $e) {
-            DB::rollBack();
+            if ($createdUser && $createdUser->exists) {
+                try {
+                    $createdUser->delete();
+                } catch (\Throwable $delEx) {
+                    Log::warning('Cleanup created user error: ' . $delEx->getMessage());
+                }
+            }
+
             Log::error('Pendaftaran gagal: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
 
             $errorMessage = 'Terjadi kendala saat memproses pendaftaran. Silakan coba kembali atau hubungi administrator jika kendala berlanjut.';

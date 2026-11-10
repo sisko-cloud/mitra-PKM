@@ -15,11 +15,12 @@ if (! empty($databaseUrl)) {
     $parsedUrl = parse_url($databaseUrl);
     if (! empty($parsedUrl['host'])) {
         $rawHost = $parsedUrl['host'];
-        if (str_contains($rawHost, 'neon.tech') && ! str_contains($rawHost, 'options=')) {
-            $endpoint = explode('.', $rawHost)[0];
-            $dbHost = "{$rawHost};options='endpoint={$endpoint}'";
+        $cleanHost = explode(';', $rawHost)[0];
+        $endpoint = explode('.', str_replace('-pooler', '', $cleanHost))[0];
+        if (str_contains($cleanHost, 'neon.tech') && ! str_contains($rawHost, 'options=')) {
+            $dbHost = "{$cleanHost};options='endpoint={$endpoint}'";
         } else {
-            $dbHost = $rawHost;
+            $dbHost = $cleanHost;
         }
         $dbPort = $parsedUrl['port'] ?? $dbPort;
         $dbName = isset($parsedUrl['path']) ? ltrim($parsedUrl['path'], '/') : $dbName;
@@ -36,7 +37,7 @@ if (! empty($databaseUrl)) {
     }
 } elseif (is_string($dbHost) && str_contains($dbHost, 'neon.tech') && ! str_contains($dbHost, 'options=')) {
     $cleanHost = explode(';', $dbHost)[0];
-    $endpoint = explode('.', $cleanHost)[0];
+    $endpoint = explode('.', str_replace('-pooler', '', $cleanHost))[0];
     $dbHost = "{$cleanHost};options='endpoint={$endpoint}'";
 }
 
@@ -101,6 +102,9 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => $dbSsl,
+            'options' => extension_loaded('pdo_pgsql') ? [
+                PDO::ATTR_EMULATE_PREPARES => true,
+            ] : [],
         ],
 
         'sqlsrv' => [

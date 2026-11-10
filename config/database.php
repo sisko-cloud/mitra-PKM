@@ -2,35 +2,60 @@
 
 use Illuminate\Support\Str;
 
+// Auto-detect and normalize Neon Serverless PostgreSQL connection URL / Host
+$databaseUrl = env('DATABASE_URL');
+$dbHost = env('DB_HOST', '127.0.0.1');
+$dbPort = env('DB_PORT', '5432');
+$dbName = env('DB_DATABASE', 'forge');
+$dbUser = env('DB_USERNAME', 'forge');
+$dbPass = env('DB_PASSWORD', '');
+$dbSsl = env('DB_SSLMODE', 'require');
+
+if (! empty($databaseUrl)) {
+    $parsedUrl = parse_url($databaseUrl);
+    if (! empty($parsedUrl['host'])) {
+        $rawHost = $parsedUrl['host'];
+        if (str_contains($rawHost, 'neon.tech') && ! str_contains($rawHost, 'options=')) {
+            $endpoint = explode('.', str_replace('-pooler', '', $rawHost))[0];
+            $dbHost = "{$rawHost};options='endpoint={$endpoint}'";
+        } else {
+            $dbHost = $rawHost;
+        }
+        $dbPort = $parsedUrl['port'] ?? $dbPort;
+        $dbName = isset($parsedUrl['path']) ? ltrim($parsedUrl['path'], '/') : $dbName;
+        $dbUser = $parsedUrl['user'] ?? $dbUser;
+        $dbPass = $parsedUrl['pass'] ?? $dbPass;
+
+        if (isset($parsedUrl['query'])) {
+            parse_str($parsedUrl['query'], $query);
+            $dbSsl = $query['sslmode'] ?? $dbSsl;
+        }
+
+        // Set to null so Laravel uses our normalized host with options rather than unparsed URL
+        $databaseUrl = null;
+    }
+} elseif (is_string($dbHost) && str_contains($dbHost, 'neon.tech') && ! str_contains($dbHost, 'options=')) {
+    $cleanHost = explode(';', $dbHost)[0];
+    $endpoint = explode('.', str_replace('-pooler', '', $cleanHost))[0];
+    $dbHost = "{$cleanHost};options='endpoint={$endpoint}'";
+}
+
+$isPgsqlDefault = (! empty(env('DATABASE_URL')) || str_contains($dbHost, 'neon.tech') || env('DB_CONNECTION') === 'pgsql');
+
 return [
 
     /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name
     |--------------------------------------------------------------------------
-    |
-    | Here you may specify which of the database connections below you wish
-    | to use as your default connection for all database work. Of course
-    | you may use many connections at once using the Database library.
-    |
     */
 
-    'default' => env('DB_CONNECTION', str_starts_with(env('DATABASE_URL', ''), 'postgres') ? 'pgsql' : 'mysql'),
+    'default' => env('DB_CONNECTION', $isPgsqlDefault ? 'pgsql' : 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
     | Database Connections
     |--------------------------------------------------------------------------
-    |
-    | Here are each of the database connections setup for your application.
-    | Of course, examples of configuring each database platform that is
-    | supported by Laravel is shown below to make development simple.
-    |
-    |
-    | All database work in Laravel is done through the PHP PDO facilities
-    | so make sure you have the driver for your particular database of
-    | choice installed on your machine before you begin development.
-    |
     */
 
     'connections' => [
@@ -65,17 +90,17 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'url' => $databaseUrl,
+            'host' => $dbHost,
+            'port' => $dbPort,
+            'database' => $dbName,
+            'username' => $dbUser,
+            'password' => $dbPass,
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => env('DB_SSLMODE', 'require'),
+            'sslmode' => $dbSsl,
         ],
 
         'sqlsrv' => [

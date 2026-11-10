@@ -119,9 +119,14 @@ class RegisteredUserController extends Controller
             DB::rollBack();
             Log::error('Pendaftaran gagal: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
 
+            $errorMessage = 'Terjadi kendala saat memproses pendaftaran. Silakan coba kembali atau hubungi administrator jika kendala berlanjut.';
+            if (config('app.debug')) {
+                $errorMessage .= ' Detail teknis: ' . $e->getMessage();
+            }
+
             return back()
                 ->withInput($request->except(['password', 'password_confirmation', 'logo', 'dokumen_pendukung']))
-                ->withErrors(['error' => 'Terjadi kendala saat memproses pendaftaran. Silakan coba kembali atau hubungi administrator jika kendala berlanjut.']);
+                ->withErrors(['error' => $errorMessage]);
         }
     }
 }

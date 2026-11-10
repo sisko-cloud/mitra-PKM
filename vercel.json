@@ -38,6 +38,8 @@
     "CACHE_DRIVER": "array",
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie",
+    "APP_KEY": "base64:1Fe/YQY825/0YUHIRAg9la0OvrLNR8d3rOCSF9l23Ho=",
+    "DATABASE_URL": "postgresql://neondb_owner:npg_7qJt9DGguCOv@ep-twilight-dew-bedj2gnb-pooler.c-9.us-east-2.aws.neon.tech/neondb?sslmode=require",
     "DB_CONNECTION": "pgsql",
     "DB_PORT": "5432",
     "DB_SSLMODE": "require"

@@ -5,10 +5,10 @@
 @section('content')
 
 <!-- HERO SECTION PUBLIK -->
-<section class="relative bg-gradient-to-b from-slate-950 via-emerald-950 to-slate-900 text-white py-16 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+<section class="relative bg-gradient-to-b from-slate-950 via-emerald-950 to-slate-900 text-white py-16 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-emerald-900/30">
     <!-- Ambient glow decorative circles -->
-    <div class="absolute -top-32 -left-32 w-[30rem] h-[30rem] bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute top-1/2 -right-32 w-[30rem] h-[30rem] bg-teal-400/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -top-32 -left-32 w-[30rem] h-[30rem] bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 -right-32 w-[30rem] h-[30rem] bg-teal-400/15 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="max-w-5xl mx-auto text-center relative z-10">
         <!-- Top Badge -->
@@ -29,24 +29,24 @@
 
         <!-- Search Bar & Filter Section -->
         <div class="max-w-3xl mx-auto">
-            <form method="GET" action="{{ route('home') }}#katalog" class="bg-white p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl shadow-2xl flex flex-col sm:flex-row items-center gap-2 text-slate-800 border border-slate-100">
+            <form method="GET" action="{{ route('home') }}#katalog" class="bg-white dark:bg-slate-900 p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl shadow-2xl flex flex-col sm:flex-row items-center gap-2 text-slate-800 dark:text-slate-100 border border-slate-100 dark:border-slate-800 transition-colors">
                 <div class="relative flex-1 w-full flex items-center">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 text-sm sm:text-base">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 dark:text-slate-500 text-sm sm:text-base">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <input type="text" name="q" value="{{ $search }}"
                         placeholder="Cari produk kopi, batik, mentai, beras, atau nama usaha..."
-                        class="w-full pl-11 pr-4 py-3 text-xs sm:text-sm md:text-base border-0 focus:ring-0 text-slate-800 placeholder-slate-400 rounded-xl focus:outline-none">
+                        class="w-full pl-11 pr-4 py-3 text-xs sm:text-sm md:text-base bg-transparent border-0 focus:ring-0 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-xl focus:outline-none">
                 </div>
 
                 <div class="flex items-center gap-2 w-full sm:w-auto shrink-0">
-                    <select name="jenis" class="text-xs sm:text-sm font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 px-3.5 rounded-xl border-0 focus:ring-0 cursor-pointer">
+                    <select name="jenis" class="text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 py-3 px-3.5 rounded-xl border-0 focus:ring-0 cursor-pointer transition">
                         <option value="">Semua Usaha</option>
                         <option value="umkm" {{ $filterJenis === 'umkm' ? 'selected' : '' }}>UMKM</option>
                         <option value="koperasi" {{ $filterJenis === 'koperasi' ? 'selected' : '' }}>Koperasi</option>
                     </select>
 
-                    <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl sm:rounded-2xl shadow-md transition shadow-emerald-600/30">
+                    <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs sm:text-sm rounded-xl sm:rounded-2xl shadow-md transition shadow-emerald-600/30">
                         <span>Cari Mitra</span>
                     </button>
                 </div>
@@ -84,27 +84,27 @@
 <section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
 
     <!-- Section Heading & Filter -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-200">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>
-            <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-600 mb-1">
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">
                 <i class="fa-solid fa-cubes"></i> Direktori Etalase
             </div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Katalog Mitra PKM Terverifikasi</h2>
-            <p class="text-xs sm:text-sm text-slate-500 mt-1">Buka dan jelajahi website promosi mandiri setiap mitra UMKM & Koperasi di bawah ini.</p>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Katalog Mitra PKM Terverifikasi</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Buka dan jelajahi website promosi mandiri setiap mitra UMKM & Koperasi di bawah ini.</p>
         </div>
 
         <!-- Filter Category Tabs -->
         <div class="flex items-center gap-2 text-xs font-semibold overflow-x-auto pb-1">
             <a href="{{ route('home', ['q' => $search]) }}#katalog"
-               class="px-4 py-2 rounded-xl transition whitespace-nowrap {{ empty($filterJenis) ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
+               class="px-4 py-2 rounded-xl transition whitespace-nowrap {{ empty($filterJenis) ? 'bg-slate-900 text-white dark:bg-emerald-600 dark:text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700' }}">
                 Semua Mitra
             </a>
             <a href="{{ route('home', ['jenis' => 'umkm', 'q' => $search]) }}#katalog"
-               class="px-4 py-2 rounded-xl transition whitespace-nowrap {{ $filterJenis === 'umkm' ? 'bg-blue-600 text-white shadow-xs' : 'bg-blue-50 text-blue-700 hover:bg-blue-100' }}">
+               class="px-4 py-2 rounded-xl transition whitespace-nowrap {{ $filterJenis === 'umkm' ? 'bg-blue-600 text-white shadow-xs' : 'bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-950/40 dark:text-blue-300 dark:hover:bg-blue-900/50' }}">
                 <i class="fa-solid fa-shop mr-1"></i> UMKM
             </a>
             <a href="{{ route('home', ['jenis' => 'koperasi', 'q' => $search]) }}#katalog"
-               class="px-4 py-2 rounded-xl transition whitespace-nowrap {{ $filterJenis === 'koperasi' ? 'bg-purple-600 text-white shadow-xs' : 'bg-purple-50 text-purple-700 hover:bg-purple-100' }}">
+               class="px-4 py-2 rounded-xl transition whitespace-nowrap {{ $filterJenis === 'koperasi' ? 'bg-purple-600 text-white shadow-xs' : 'bg-purple-50 text-purple-700 hover:bg-purple-100 dark:bg-purple-950/40 dark:text-purple-300 dark:hover:bg-purple-900/50' }}">
                 <i class="fa-solid fa-users-rectangle mr-1"></i> Koperasi
             </a>
         </div>
@@ -112,12 +112,12 @@
 
     <!-- Empty State -->
     @if ($mitras->count() === 0)
-        <div class="bg-white rounded-3xl border border-slate-200 p-12 text-center shadow-xs max-w-lg mx-auto">
-            <div class="w-20 h-20 rounded-3xl bg-slate-100 text-slate-400 flex items-center justify-center text-4xl mx-auto mb-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-12 text-center shadow-xs max-w-lg mx-auto">
+            <div class="w-20 h-20 rounded-3xl bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 flex items-center justify-center text-4xl mx-auto mb-4">
                 <i class="fa-solid fa-store-slash"></i>
             </div>
-            <h3 class="text-lg font-bold text-slate-800 mb-2">Belum Ada Mitra Ditemukan</h3>
-            <p class="text-xs sm:text-sm text-slate-500 mb-6 leading-relaxed">
+            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Belum Ada Mitra Ditemukan</h3>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">
                 @if ($search || $filterJenis)
                     Tidak ada mitra yang cocok dengan pencarian Anda. Silakan coba kata kunci lain.
                 @else
@@ -139,7 +139,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             @foreach ($mitras as $mitra)
                 <a href="{{ route('mitra.show', ['slug' => $mitra->slug]) }}"
-                   class="group bg-white rounded-3xl border border-slate-200 shadow-xs hover:shadow-xl hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
+                   class="group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-emerald-300 dark:hover:border-emerald-500 transition-all duration-300 flex flex-col justify-between overflow-hidden relative">
 
                     <div>
                         <!-- Cover Image with Gradient Mask -->
@@ -174,44 +174,44 @@
                             <div class="-mt-12 mb-4 flex items-center justify-between">
                                 @if ($mitra->logo)
                                     <img src="{{ asset('storage/' . $mitra->logo) }}" alt="{{ $mitra->nama_usaha }}"
-                                         class="w-16 h-16 rounded-2xl object-cover bg-white p-1 ring-4 ring-white shadow-md">
+                                         class="w-16 h-16 rounded-2xl object-cover bg-white dark:bg-slate-800 p-1 ring-4 ring-white dark:ring-slate-900 shadow-md">
                                 @else
-                                    <div class="w-16 h-16 rounded-2xl bg-emerald-600 text-white font-black text-2xl flex items-center justify-center ring-4 ring-white shadow-md">
+                                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white font-black text-2xl flex items-center justify-center ring-4 ring-white dark:ring-slate-900 shadow-md">
                                         {{ substr($mitra->nama_usaha, 0, 2) }}
                                     </div>
                                 @endif
 
-                                <span class="text-xs text-slate-400 font-semibold flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-100">
-                                    <i class="fa-solid fa-boxes-stacked text-emerald-600"></i>
+                                <span class="text-xs text-slate-400 dark:text-slate-400 font-semibold flex items-center gap-1 bg-slate-50 dark:bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-100 dark:border-slate-700">
+                                    <i class="fa-solid fa-boxes-stacked text-emerald-600 dark:text-emerald-400"></i>
                                     {{ $mitra->products->count() }} Produk
                                 </span>
                             </div>
 
                             <!-- Title -->
-                            <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition tracking-tight mb-1.5 line-clamp-1">
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition tracking-tight mb-1.5 line-clamp-1">
                                 {{ $mitra->nama_usaha }}
                             </h3>
 
                             <!-- Tagline / Description -->
-                            <p class="text-xs text-slate-500 leading-relaxed line-clamp-2 mb-4 min-h-[2rem]">
+                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2 mb-4 min-h-[2rem]">
                                 {{ $mitra->websiteContent?->tagline ?? $mitra->websiteContent?->deskripsi ?? 'Buka website promosi resmi untuk melihat katalog produk dan info kontak.' }}
                             </p>
 
                             <!-- Address Row -->
-                            <div class="flex items-center gap-1.5 text-xs text-slate-400 truncate">
-                                <i class="fa-solid fa-location-dot text-emerald-600 shrink-0"></i>
+                            <div class="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500 truncate">
+                                <i class="fa-solid fa-location-dot text-emerald-600 dark:text-emerald-400 shrink-0"></i>
                                 <span class="truncate">{{ $mitra->alamat }}</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card Action Footer -->
-                    <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs">
-                        <span class="font-bold text-slate-700 group-hover:text-emerald-700 transition flex items-center gap-1">
+                    <div class="p-4 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                        <span class="font-bold text-slate-700 dark:text-slate-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition flex items-center gap-1">
                             Buka Website <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
                         </span>
-                        <span class="text-emerald-700 font-bold bg-emerald-100 px-2.5 py-1 rounded-md text-[11px] inline-flex items-center gap-1">
-                            <i class="fa-brands fa-whatsapp text-emerald-600"></i> Direct WA
+                        <span class="text-emerald-700 dark:text-emerald-300 font-bold bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 rounded-md text-[11px] inline-flex items-center gap-1 border border-emerald-200 dark:border-emerald-800/50">
+                            <i class="fa-brands fa-whatsapp text-emerald-600 dark:text-emerald-400"></i> Direct WA
                         </span>
                     </div>
 
@@ -228,9 +228,9 @@
 </section>
 
 <!-- CALL TO ACTION: AJAKAN BERGABUNG -->
-<section id="tentang-pkm" class="bg-slate-100 border-t border-slate-200 py-16 sm:py-20">
+<section id="tentang-pkm" class="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-16 sm:py-20 transition-colors">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 rounded-3xl p-8 sm:p-14 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="bg-gradient-to-r from-emerald-950 via-teal-950 to-slate-900 rounded-3xl p-8 sm:p-14 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-emerald-900/40">
             <div class="max-w-2xl text-center lg:text-left">
                 <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider border border-emerald-400/30 mb-3 inline-block">
                     Inisiatif Pemberdayaan PKM
@@ -238,12 +238,12 @@
                 <h3 class="text-2xl sm:text-3xl font-extrabold mb-3 leading-snug">
                     Pemilik UMKM atau Pengurus Koperasi Binaan PKM?
                 </h3>
-                <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
                     Dapatkan website promosi resmi mandiri dengan 4 section lengkap (Beranda, Profil, Katalog Produk, Kontak & Peta) serta terhubung langsung ke WhatsApp Anda secara gratis.
                 </p>
             </div>
             <div class="shrink-0 flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-                <a href="{{ route('register') }}" class="px-6 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm rounded-xl text-center shadow-lg transition shadow-emerald-500/30">
+                <a href="{{ route('register') }}" class="px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl text-center shadow-lg transition shadow-emerald-500/30">
                     <i class="fa-solid fa-plus-circle mr-1.5"></i> Daftar sebagai Mitra
                 </a>
                 <a href="{{ route('login') }}" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm rounded-xl text-center border border-white/20 transition">

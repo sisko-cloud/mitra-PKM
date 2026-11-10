@@ -83,61 +83,6 @@
         </header>
     @endif
 
-    <!-- Alert Messages (Flash) -->
-    <div class="w-full px-4 sm:px-6 lg:px-8 pt-6">
-        @if (session('success')) 
-            <div x-data="{ show: true }" x-show="show" class="mb-4 flex items-center justify-between p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 rounded-xl shadow-xs">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400 text-lg"></i>
-                    <span class="text-sm font-medium">{{ session('success') }}</span>
-                </div>
-                <button @click="show = false" class="text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-300">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-        @endif
-
-        @if (session('info'))
-            <div x-data="{ show: true }" x-show="show" class="mb-4 flex items-center justify-between p-4 bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 text-sky-800 dark:text-sky-300 rounded-xl shadow-xs">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-circle-info text-sky-600 dark:text-sky-400 text-lg"></i>
-                    <span class="text-sm font-medium">{{ session('info') }}</span>
-                </div>
-                <button @click="show = false" class="text-sky-500 hover:text-sky-700 dark:hover:text-sky-300">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div x-data="{ show: true }" x-show="show" class="mb-4 flex items-center justify-between p-4 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 rounded-xl shadow-xs">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-triangle-exclamation text-rose-600 dark:text-rose-400 text-lg"></i>
-                    <span class="text-sm font-medium">{{ session('error') }}</span>
-                </div>
-                <button @click="show = false" class="text-rose-500 hover:text-rose-700 dark:hover:text-rose-300">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-        @endif
-
-        @if ($errors->any())
-            <div x-data="{ show: true }" x-show="show" class="mb-4 p-4 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 rounded-xl shadow-xs">
-                <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-circle-exclamation text-rose-600 dark:text-rose-400 text-lg mt-0.5"></i>
-                    <div>
-                        <span class="text-sm font-semibold block mb-1">Terdapat beberapa kesalahan input:</span>
-                        <ul class="list-disc list-inside text-xs space-y-1">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        @endif
-    </div>
-
     <!-- Page Content -->
     <main class="flex-grow pb-16">
         @yield('content')

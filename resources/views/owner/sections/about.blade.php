@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('owner.about.update') }}" enctype="multipart/form-data" class="space-y-6">
+        <form id="about-form" method="POST" action="{{ route('owner.about.update') }}" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
             <!-- Deskripsi Usaha -->

@@ -16,7 +16,7 @@
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
                 <div class="shrink-0">
                     @if ($mitra->logo)
-                        <img src="{{ asset('storage/' . $mitra->logo) }}" alt="{{ $mitra->nama_usaha }}" class="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl object-cover bg-white p-1 shadow-md border-2 border-orange-400">
+                        <img src="{{ Str::startsWith($mitra->logo, ['http', 'data:']) ? $mitra->logo : asset('storage/' . $mitra->logo) }}" alt="{{ $mitra->nama_usaha }}" class="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl object-cover bg-white p-1 shadow-md border-2 border-orange-400">
                     @else
                         <div class="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-orange-600 to-amber-500 border-2 border-orange-400/60 text-white flex items-center justify-center font-black text-xl sm:text-2xl shadow-md">
                             {{ substr($mitra->nama_usaha, 0, 2) }}

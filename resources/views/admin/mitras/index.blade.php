@@ -55,7 +55,7 @@
                                 <td class="py-3.5 px-4">
                                     <div class="flex items-center gap-3">
                                         @if ($mitra->logo)
-                                            <img src="{{ asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-9 h-9 rounded-lg object-cover border border-slate-200 shrink-0">
+                                            <img src="{{ Str::startsWith($mitra->logo, ['http', 'data:']) ? $mitra->logo : asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-9 h-9 rounded-lg object-cover border border-slate-200 shrink-0">
                                         @else
                                             <div class="w-9 h-9 rounded-lg bg-orange-100 text-orange-800 font-bold text-xs flex items-center justify-center shrink-0">
                                                 {{ substr($mitra->nama_usaha, 0, 2) }}

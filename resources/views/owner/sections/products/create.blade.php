@@ -70,15 +70,53 @@
             </div>
 
             <!-- Foto Produk -->
-            <div>
+            <div x-data="{
+                preview: null,
+                onFileChange(e) {
+                    const file = e.target.files[0];
+                    if (!file) {
+                        this.preview = null;
+                        return;
+                    }
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('Ukuran file maksimal 2 MB.');
+                        e.target.value = '';
+                        this.preview = null;
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = (event) => { this.preview = event.target.result; };
+                    reader.readAsDataURL(file);
+                },
+                removeFile() {
+                    this.preview = null;
+                    this.$refs.fileInput.value = '';
+                }
+            }">
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                     Foto Produk / Galeri
                 </label>
                 <p class="text-xs text-slate-500 mb-2">Format yang didukung: JPG, PNG, WEBP. Maksimal ukuran file: <strong>2 MB</strong>.</p>
                 <div class="p-4 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50">
-                    <input id="foto" type="file" name="foto" accept="image/png,image/jpeg,image/webp"
+                    <input id="foto" type="file" name="foto" accept="image/png,image/jpeg,image/webp" x-ref="fileInput" @change="onFileChange($event)"
                         class="block w-full text-xs text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-orange-600 file:text-white hover:file:bg-orange-700 file:cursor-pointer">
                 </div>
+
+                <!-- Live Preview -->
+                <template x-if="preview">
+                    <div class="mt-3 p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between gap-4 shadow-xs">
+                        <div class="flex items-center gap-3">
+                            <img :src="preview" alt="Pratinjau Foto Produk" class="w-16 h-16 object-cover rounded-lg border border-slate-200 shadow-xs">
+                            <div class="text-xs text-slate-600">
+                                <span class="font-bold text-emerald-600 block"><i class="fa-solid fa-check-circle mr-1"></i> Foto Siap Diunggah</span>
+                                Disimpan permanen ke etalase Anda.
+                            </div>
+                        </div>
+                        <button type="button" @click="removeFile()" class="px-3 py-1.5 text-xs text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition font-semibold">
+                            <i class="fa-solid fa-xmark mr-1"></i> Batal
+                        </button>
+                    </div>
+                </template>
             </div>
 
             <!-- Action Buttons -->

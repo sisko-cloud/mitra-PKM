@@ -63,7 +63,7 @@ class OwnerStatusController extends Controller
             if ($mitra && $mitra->logo) {
                 FileUploadService::delete($mitra->logo);
             }
-            $newLogo = FileUploadService::upload($request->file('logo'), 'logos');
+            $newLogo = FileUploadService::toBase64($request->file('logo'));
             if ($newLogo) {
                 $updateData['logo'] = $newLogo;
             }

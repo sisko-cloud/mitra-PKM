@@ -68,24 +68,80 @@
             </div>
 
             <!-- Foto Produk Saat Ini & Ganti Foto -->
-            <div>
+            <div x-data="{
+                preview: null,
+                hasExisting: {{ $product->foto ? 'true' : 'false' }},
+                hapusFoto: false,
+                onFileChange(e) {
+                    const file = e.target.files[0];
+                    if (!file) {
+                        this.preview = null;
+                        return;
+                    }
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('Ukuran file maksimal 2 MB.');
+                        e.target.value = '';
+                        this.preview = null;
+                        return;
+                    }
+                    this.hapusFoto = false;
+                    const reader = new FileReader();
+                    reader.onload = (event) => { this.preview = event.target.result; };
+                    reader.readAsDataURL(file);
+                },
+                removeNewFile() {
+                    this.preview = null;
+                    this.$refs.fileInput.value = '';
+                }
+            }">
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                     Foto Produk (Maks 2 MB)
                 </label>
 
+                <input type="hidden" name="hapus_foto" :value="hapusFoto ? '1' : '0'">
+
                 @if ($product->foto)
-                    <div class="mb-3 flex items-center gap-4 p-3 bg-slate-50 border border-slate-200 rounded-xl">
-                        <img src="{{ Str::startsWith($product->foto, 'http') ? $product->foto : asset('storage/' . $product->foto) }}" 
-                             alt="{{ $product->nama }}" class="w-16 h-16 object-cover rounded-lg shadow-xs">
-                        <div class="text-xs text-slate-500">
-                            <span class="font-bold text-slate-800 block">Foto Saat Ini</span>
-                            Unggah foto baru di bawah jika ingin menggantinya. Foto lama akan otomatis diganti.
+                    <div x-show="hasExisting && !hapusFoto && !preview" class="mb-3 flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                        <div class="flex items-center gap-4">
+                            <img src="{{ Str::startsWith($product->foto, ['http', 'data:']) ? $product->foto : asset('storage/' . $product->foto) }}" 
+                                 alt="{{ $product->nama }}" class="w-16 h-16 object-cover rounded-lg shadow-xs border border-slate-200"
+                                 onerror="this.parentElement.parentElement.classList.add('hidden')">
+                            <div class="text-xs text-slate-500">
+                                <span class="font-bold text-slate-800 block">Foto Saat Ini</span>
+                                Foto tersimpan permanen di etalase Anda.
+                            </div>
                         </div>
+                        <button type="button" @click="hapusFoto = true" class="px-3 py-1.5 text-xs text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition font-semibold">
+                            <i class="fa-regular fa-trash-can mr-1"></i> Hapus Foto
+                        </button>
+                    </div>
+
+                    <div x-show="hapusFoto && !preview" class="mb-3 p-3 bg-rose-50 border border-rose-200 rounded-xl flex items-center justify-between text-xs text-rose-700">
+                        <span><i class="fa-solid fa-triangle-exclamation mr-1"></i> Foto akan dihapus saat disimpan.</span>
+                        <button type="button" @click="hapusFoto = false" class="underline font-bold text-rose-800 hover:text-rose-900">
+                            Batal Hapus
+                        </button>
                     </div>
                 @endif
 
+                <!-- Live Preview New File -->
+                <template x-if="preview">
+                    <div class="mb-3 p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between gap-4 shadow-xs">
+                        <div class="flex items-center gap-3">
+                            <img :src="preview" alt="Pratinjau Foto Baru" class="w-16 h-16 object-cover rounded-lg border border-slate-200 shadow-xs">
+                            <div class="text-xs text-slate-600">
+                                <span class="font-bold text-emerald-600 block"><i class="fa-solid fa-check-circle mr-1"></i> Foto Baru Dipilih</span>
+                                Akan menggantikan foto lama secara permanen.
+                            </div>
+                        </div>
+                        <button type="button" @click="removeNewFile()" class="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded-lg border border-slate-300 transition font-semibold">
+                            <i class="fa-solid fa-xmark mr-1"></i> Batalkan Foto Baru
+                        </button>
+                    </div>
+                </template>
+
                 <div class="p-4 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50">
-                    <input id="foto" type="file" name="foto" accept="image/png,image/jpeg,image/webp"
+                    <input id="foto" type="file" name="foto" accept="image/png,image/jpeg,image/webp" x-ref="fileInput" @change="onFileChange($event)"
                         class="block w-full text-xs text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-orange-600 file:text-white hover:file:bg-orange-700 file:cursor-pointer">
                 </div>
             </div>

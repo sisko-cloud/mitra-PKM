@@ -65,8 +65,8 @@ class RegisteredUserController extends Controller
         $createdUser = null;
 
         try {
-            // 1. Upload Logo & Dokumen terlebih dahulu secara aman (di luar DB)
-            $logoPath = FileUploadService::upload($request->file('logo'), 'logos');
+            // 1. Upload Logo (Base64 persistent) & Dokumen terlebih dahulu secara aman (di luar DB)
+            $logoPath = FileUploadService::toBase64($request->file('logo'));
             $dokumenPath = FileUploadService::upload($request->file('dokumen_pendukung'), 'dokumen');
 
             // 2. Generate slug unik (query read ringan)

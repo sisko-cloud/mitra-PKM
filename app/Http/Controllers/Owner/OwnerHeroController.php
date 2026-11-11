@@ -45,7 +45,7 @@ class OwnerHeroController extends Controller
             if ($content->hero_image) {
                 FileUploadService::delete($content->hero_image);
             }
-            $uploaded = FileUploadService::upload($request->file('hero_image'), 'heroes');
+            $uploaded = FileUploadService::toBase64($request->file('hero_image'));
             if ($uploaded) {
                 $imagePath = $uploaded;
             }

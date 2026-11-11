@@ -44,7 +44,7 @@ class OwnerProductController extends Controller
 
         $fotoPath = null;
         if ($request->hasFile('foto')) {
-            $fotoPath = FileUploadService::upload($request->file('foto'), 'products');
+            $fotoPath = FileUploadService::toBase64($request->file('foto'));
         }
 
         $nextUrutan = $request->filled('urutan')
@@ -90,15 +90,17 @@ class OwnerProductController extends Controller
         ]);
 
         $fotoPath = $product->foto;
-        if ($request->hasFile('foto')) {
+        if ($request->boolean('hapus_foto')) {
+            if ($product->foto) {
+                FileUploadService::delete($product->foto);
+            }
+            $fotoPath = null;
+        } elseif ($request->hasFile('foto')) {
             // Hapus file lama jika ada
             if ($product->foto) {
                 FileUploadService::delete($product->foto);
             }
-            $uploaded = FileUploadService::upload($request->file('foto'), 'products');
-            if ($uploaded) {
-                $fotoPath = $uploaded;
-            }
+            $fotoPath = FileUploadService::toBase64($request->file('foto'));
         }
 
         $product->update([
@@ -118,8 +120,8 @@ class OwnerProductController extends Controller
         $mitra = Auth::user()->mitra;
         $product = $mitra->products()->findOrFail($id);
 
-        if ($product->foto && Storage::disk('public')->exists($product->foto)) {
-            Storage::disk('public')->delete($product->foto);
+        if ($product->foto) {
+            FileUploadService::delete($product->foto);
         }
 
         $nama = $product->nama;

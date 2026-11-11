@@ -27,7 +27,7 @@
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
                 <div class="flex items-start gap-4 pb-6 border-b border-slate-200 mb-6">
                     @if ($mitra->logo)
-                        <img src="{{ asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-16 h-16 rounded-xl object-cover border border-slate-200 shadow-xs">
+                        <img src="{{ Str::startsWith($mitra->logo, ['http', 'data:']) ? $mitra->logo : asset('storage/' . $mitra->logo) }}" alt="Logo" class="w-16 h-16 rounded-xl object-cover border border-slate-200 shadow-xs">
                     @else
                         <div class="w-16 h-16 rounded-xl bg-slate-100 text-slate-500 font-extrabold text-2xl flex items-center justify-center shrink-0 border border-slate-200">
                             {{ substr($mitra->nama_usaha, 0, 2) }}

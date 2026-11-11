@@ -58,6 +58,28 @@ class FileUploadService
     }
 
     /**
+     * Convert an uploaded image file into a persistent Data URI (Base64)
+     * suitable for serverless platforms with ephemeral disk storage.
+     *
+     * @param UploadedFile|null $file
+     * @return string|null Data URI (e.g. data:image/jpeg;base64,...) or null
+     */
+    public static function toBase64(?UploadedFile $file): ?string
+    {
+        if (! $file || ! $file->isValid()) {
+            return null;
+        }
+
+        $mime = $file->getMimeType() ?: 'image/jpeg';
+        $raw = @file_get_contents($file->getRealPath());
+        if (! $raw) {
+            return null;
+        }
+
+        return 'data:' . $mime . ';base64,' . base64_encode($raw);
+    }
+
+    /**
      * Delete an existing file safely across primary disk and serverless fallback.
      *
      * @param string|null $path
@@ -65,7 +87,7 @@ class FileUploadService
      */
     public static function delete(?string $path, string $disk = 'public'): void
     {
-        if (! $path) {
+        if (! $path || Str::startsWith($path, ['http://', 'https://', 'data:'])) {
             return;
         }
 

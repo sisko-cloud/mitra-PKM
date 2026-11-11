@@ -51,8 +51,9 @@
                             <!-- Foto Produk -->
                             <div class="h-44 bg-slate-100 relative overflow-hidden">
                                 @if ($product->foto)
-                                    <img src="{{ Str::startsWith($product->foto, 'http') ? $product->foto : asset('storage/' . $product->foto) }}" 
-                                         alt="{{ $product->nama }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                    <img src="{{ Str::startsWith($product->foto, ['http', 'data:']) ? $product->foto : asset('storage/' . $product->foto) }}" 
+                                         alt="{{ $product->nama }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-slate-400 bg-slate-100\'><i class=\'fa-regular fa-image text-3xl\'></i></div>'">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center text-slate-400 bg-slate-100">
                                         <i class="fa-regular fa-image text-3xl"></i>

@@ -173,7 +173,7 @@
                         <div class="p-6 relative">
                             <div class="-mt-12 mb-4 flex items-center justify-between">
                                 @if ($mitra->logo)
-                                    <img src="{{ asset('storage/' . $mitra->logo) }}" alt="{{ $mitra->nama_usaha }}"
+                                    <img src="{{ Str::startsWith($mitra->logo, ['http', 'data:']) ? $mitra->logo : asset('storage/' . $mitra->logo) }}" alt="{{ $mitra->nama_usaha }}"
                                          class="w-16 h-16 rounded-2xl object-cover bg-white dark:bg-slate-800 p-1 ring-4 ring-white dark:ring-slate-900 shadow-md">
                                 @else
                                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-orange-600 to-amber-500 text-white font-black text-2xl flex items-center justify-center ring-4 ring-white dark:ring-slate-900 shadow-md">

@@ -92,7 +92,7 @@
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <span class="inline-flex items-center gap-2 font-medium">
                 <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
-                <span>Platform Resmi Direktori & Etalase UMKM &bull; Koperasi Mitra PKM</span>
+                <span>Platform Resmi Direktori & Etalase Mitra PKM Politeknik Negeri Sambas</span>
             </span>
             <div class="hidden sm:flex items-center gap-4 text-[11px] text-orange-200">
                 <span><i class="fa-solid fa-shield-halved mr-1 text-orange-400"></i> Terverifikasi Resmi</span>

@@ -108,7 +108,7 @@
     <!-- STICKY HEADER NAVIGATION -->
     <header class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 sticky {{ !empty($isPreview) && $isPreview ? 'top-8' : 'top-0' }} z-40 shadow-xs transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16 sm:h-20">
+            <div class="flex items-center justify-between gap-4 sm:gap-6 h-16 sm:h-20">
 
                 <!-- Logo & Business Name -->
                 <a href="#beranda" class="flex items-center gap-3 group shrink-0">
@@ -120,7 +120,7 @@
                         </div>
                     @endif
                     <div>
-                        <span class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight block leading-tight group-hover:text-orange-600 dark:group-hover:text-orange-400 transition">
+                        <span class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight block leading-tight group-hover:text-orange-600 dark:group-hover:text-orange-400 transition truncate max-w-[180px] sm:max-w-xs md:max-w-sm">
                             {{ $mitra->nama_usaha }}
                         </span>
                         <div class="flex items-center gap-1.5 -mt-0.5">
@@ -133,7 +133,7 @@
                 </a>
 
                 <!-- 4 Sections Nav Links (Desktop) -->
-                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600 dark:text-slate-300">
+                <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-semibold text-slate-600 dark:text-slate-300 shrink-0">
                     <a href="#beranda" class="hover:text-orange-600 dark:hover:text-orange-400 transition">Beranda</a>
                     <a href="#tentang" class="hover:text-orange-600 dark:hover:text-orange-400 transition">Tentang Kami</a>
                     <a href="#produk" class="hover:text-orange-600 dark:hover:text-orange-400 transition">Katalog Produk</a>

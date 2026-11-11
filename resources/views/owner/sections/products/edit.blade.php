@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('owner.products.update', $product->id) }}" enctype="multipart/form-data" class="space-y-6">
+        <form id="product-edit-form" method="POST" action="{{ route('owner.products.update', $product->id) }}" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
 

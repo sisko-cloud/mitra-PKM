@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('owner.products.store') }}" enctype="multipart/form-data" class="space-y-6">
+        <form id="product-create-form" method="POST" action="{{ route('owner.products.store') }}" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
             <!-- Nama Produk -->

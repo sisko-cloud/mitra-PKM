@@ -54,7 +54,7 @@ class OwnerSettingController extends Controller
         }
 
         $mitra->slug = $slug;
-        $mitra->is_active = $request->boolean('is_active', true);
+        $mitra->is_active = $request->boolean('is_active');
         $mitra->save();
 
         return back()->with('success', 'Pengaturan website dan URL berhasil disimpan!');

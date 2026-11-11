@@ -47,13 +47,7 @@ class ProfileController extends Controller
                 FileUploadService::delete($user->foto_profil);
             }
 
-            $mime = $file->getMimeType() ?: 'image/jpeg';
-            $raw = @file_get_contents($file->getRealPath());
-            if ($raw && strlen($raw) <= 2 * 1024 * 1024) {
-                $user->foto_profil = 'data:' . $mime . ';base64,' . base64_encode($raw);
-            } else {
-                $user->foto_profil = FileUploadService::upload($file, 'avatars');
-            }
+            $user->foto_profil = FileUploadService::toBase64($file);
         }
 
         if ($user->isDirty('email')) {

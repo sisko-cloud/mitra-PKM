@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('owner.hero.update') }}" enctype="multipart/form-data" class="space-y-6">
+        <form id="hero-form" method="POST" action="{{ route('owner.hero.update') }}" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
             <!-- Judul Website -->
@@ -52,15 +52,33 @@
             </div>
 
             <!-- Gambar Sampul (Hero Image) -->
-            <div>
+            <div x-data="{
+                previewUrl: null,
+                fileChosen(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        this.previewUrl = URL.createObjectURL(file);
+                    } else {
+                        this.previewUrl = null;
+                    }
+                }
+            }">
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                     Gambar Sampul Utama (Hero Banner)
                 </label>
-                <p class="text-xs text-slate-500 mb-3">Format didukung: JPG, JPEG, PNG, WEBP. Maksimal ukuran file: <strong>2 MB</strong>. Gambar lama akan otomatis terhapus dari server saat Anda mengunggah gambar baru.</p>
+                <p class="text-xs text-slate-500 mb-3">Format didukung: JPG, JPEG, PNG, WEBP. Maksimal ukuran file: <strong>2 MB</strong>. Tersimpan secara permanen ke basis data.</p>
+
+                <!-- Pratinjau File Baru Dipilih -->
+                <div x-show="previewUrl" class="mb-4 relative rounded-xl overflow-hidden border-2 border-orange-400 shadow-md max-h-64" style="display: none;">
+                    <img :src="previewUrl" alt="Pratinjau Hero Baru" class="w-full h-56 object-cover">
+                    <div class="absolute bottom-2 left-2 bg-orange-600/90 text-white text-[11px] px-2.5 py-1 rounded-md font-bold flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-sparkles"></i> Pratinjau Gambar Baru (Belum Disimpan)
+                    </div>
+                </div>
 
                 <!-- Current Image Preview -->
                 @if ($content->hero_image)
-                    <div class="mb-4 relative rounded-xl overflow-hidden border border-slate-200 shadow-xs max-h-64 group">
+                    <div x-show="!previewUrl" class="mb-4 relative rounded-xl overflow-hidden border border-slate-200 shadow-xs max-h-64 group">
                         <img src="{{ Str::startsWith($content->hero_image, ['http', 'data:']) ? $content->hero_image : asset('storage/' . $content->hero_image) }}" 
                              alt="Gambar Sampul" class="w-full h-56 object-cover">
                         <div class="absolute bottom-2 left-2 bg-slate-900/80 backdrop-blur-xs text-white text-[11px] px-2.5 py-1 rounded-md font-semibold">
@@ -71,6 +89,7 @@
 
                 <div class="p-4 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 hover:bg-slate-100/50 transition">
                     <input id="hero_image" type="file" name="hero_image" accept="image/jpeg,image/png,image/webp"
+                        @change="fileChosen($event)"
                         class="block w-full text-xs text-slate-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-orange-600 file:text-white hover:file:bg-orange-700 file:cursor-pointer">
                 </div>
             </div>

@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('owner.contact.update') }}" class="space-y-6">
+        <form id="contact-form" method="POST" action="{{ route('owner.contact.update') }}" class="space-y-6">
             @csrf
 
             <!-- WhatsApp Direct Conversion (Primary) -->

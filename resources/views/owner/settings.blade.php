@@ -52,7 +52,7 @@
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-8">
 
         <!-- Form Slug & Status Aktif -->
-        <form method="POST" action="{{ route('owner.settings.update') }}" class="space-y-6">
+        <form id="settings-form" method="POST" action="{{ route('owner.settings.update') }}" class="space-y-6">
             @csrf
 
             <div class="flex items-center gap-3 pb-4 border-b border-slate-200">

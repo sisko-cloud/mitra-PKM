@@ -18,6 +18,7 @@ class WebsiteContent extends Model
         'deskripsi',
         'sejarah',
         'visi_misi',
+        'struktur_organisasi',
         'is_draft',
         'draft_data',
     ];

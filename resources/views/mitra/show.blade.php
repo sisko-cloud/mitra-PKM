@@ -298,6 +298,22 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Struktur Organisasi --}}
+            @if ($content?->struktur_organisasi)
+                <div class="mt-12">
+                    <div class="text-center mb-6">
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-sitemap text-orange-600 dark:text-orange-400"></i>
+                            <span>Struktur Organisasi</span>
+                        </h3>
+                    </div>
+                    <div class="bg-white dark:bg-slate-900/60 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-6 shadow-sm">
+                        <img src="{{ $content->struktur_organisasi }}" alt="Struktur Organisasi {{ $mitra->nama_usaha }}"
+                            class="w-full max-h-[600px] object-contain rounded-xl mx-auto">
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 

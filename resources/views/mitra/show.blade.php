@@ -367,10 +367,10 @@
 
                                 <!-- Body Info -->
                                 <div class="p-6">
-                                    <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition mb-2 line-clamp-1">
+                                    <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition mb-2 line-clamp-2 min-h-[3rem]" title="{{ $product->nama }}">
                                         {{ $product->nama }}
                                     </h3>
-                                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
+                                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3 min-h-[3.75rem]">
                                         {{ $product->deskripsi ?? 'Produk berkualitas dari ' . $mitra->nama_usaha . '.' }}
                                     </p>
                                 </div>
